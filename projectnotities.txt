@@ -1,0 +1,30 @@
+Individueel project
+
+Onderwerp:
+Het uiteindelijke doel is een opzet maken voor een trading card game
+Een trading card game is nooit af. Om de zoveel tijd komt er een uitbereiding
+uit. Dit is inherrent aan het soort spel.
+
+Minimum viable product:
+-Een kleine backend met kaarten een inheritance structuur.
+-een Api
+-Een frontend die kaarten aan een hand toe voegt en me toe staat die
+kaarten te bewegen over een veld met 9 vakjes.
+
+Verdere uitbereidingen:
+-Een manier om HP of iets vergelijkbaars van spelers bij te houden.
+-verschillende kaarten, en daarmee een forse uitbereiding van de backend.
+-De mogelijkheid om in de client een effect te activeren (afhankelijk van de kaart en de locatie van deze kaart)
+-Mogelijk een kleine database die weet welke kaarten er zijn.
+-Twee spelers
+
+
+Leerdoelen
+Inhoudelijk: Ruby, ruby, ruby, ruby. (Those are, in fact, song lyrics) Specifiek:
+-De programeertaal ruby
+-Ruby on rails
+-Eventueel ook turbo voor de frontend.
+
+Persoonlijk: Zelfstandig een heel project opzetten. Structuur houden.
+
+
