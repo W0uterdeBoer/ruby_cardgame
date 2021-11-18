@@ -1,10 +1,6 @@
-task default: %w[test]
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
-task :run do
-  ruby 'lib/Card.arb'
-end
+require_relative "config/application"
 
-task :test do
-  ruby 'test/test_test.rb'
-end
-
+Rails.application.load_tasks
