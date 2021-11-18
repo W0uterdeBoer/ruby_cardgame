@@ -1,4 +1,5 @@
 require_relative '../lib/Card.rb'
+require_relative '../lib/Player.rb'
 
 class Location
     attr_reader :cards
@@ -15,16 +16,20 @@ end
 
 class Deck < Location
     STARTINGSIZE = 40
-    attr_reader :hand
+    attr_reader :hand 
     def initialize(name)
-        player = Player.new(name)
-        @hand = Hand.new(player)
-        cardlist=[Redcard.new(player, self), Bluecard.new(player, self)]
+        @player = Player.new(name)
+        @hand = Hand.new(@player)       
+    end
+
+    def fill()
+        redcard = Redcard.new(@player, self)
+        bluecard = Bluecard.new(@player, self)
+        cardlist=[redcard, bluecard]
         @cards=Array.new(STARTINGSIZE){
             |card| card = cardlist.sample
         }
     end
-
 
     def draw()
         drawnCard = cards.shift

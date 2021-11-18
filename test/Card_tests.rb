@@ -6,6 +6,7 @@ require_relative '../lib/Player.rb'
 class Cardtests < MiniTest::Test
 	def setup		
 		@deck = Deck.new("Wendy")
+		@deck.fill()
 		@acard = @deck.cards[0]
 		@hand = @deck.hand		
 	end
@@ -43,4 +44,11 @@ class Cardtests < MiniTest::Test
 		assert_equal(39, @deck.cards.length)
 		assert_equal(1, @hand.cards.length)
 	end
+
+	def test_red_cards
+		player = Player.new("Wendy")
+		card = Redcard.new(player, @deck)
+		assert_instance_of(Redcard, card)
+	end
+
 end
