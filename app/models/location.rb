@@ -12,20 +12,20 @@ class Location
         end
         isInLocation
     end
+
+    def remove(card)
+        raise "remove not implemented."
+    end
 end
 
 class Deck < Location
     STARTINGSIZE = 40
     attr_reader :hand 
-    def initialize(name)
-        @player = Player.new(name)
-        @hand = Hand.new(@player)       
+    def initialize(hand)
+        @hand = hand     
     end
 
-    def fill()
-        redcard = Redcard.new(@player, self)
-        bluecard = Bluecard.new(@player, self)
-        cardlist=[redcard, bluecard]
+    def fill(cardlist)   
         @cards=Array.new(STARTINGSIZE){
             |card| card = cardlist.sample
         }
@@ -35,22 +35,29 @@ class Deck < Location
         drawnCard = cards.shift
         puts cards.length
 
-        hand.add(drawnCard)
+        @hand.add(drawnCard)
         return nil
     end
 end
 
 class Hand < Location
-    attr_reader :cards, :player
     
-    def initialize(player)
-        @cards = Array.new
+    def initialize()
+        @cards = Array.new()
     end
 
     def add(card)
-        cards.push(card)
+        @cards.push(card)
     end
 
+    def remove(card)
+        cards.each_with_index do |cardInHand, i| 
+            if cardInHand == card
+                removedCard = @cards.delete_at(i)
+            end
+            removedCard
+        end
+    end
 end
 
 class Field < Location
