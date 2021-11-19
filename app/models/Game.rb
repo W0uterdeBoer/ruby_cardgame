@@ -7,6 +7,15 @@ class Game
 		deck.fill()
 		acard = deck.cards[0]
 		hand = deck.hand	
-        @gameState = deck	
+        5.times{deck.draw()}
+        @gameState = GameState.new(deck,hand)
     end 
+end
+
+class GameState
+    attr_reader :deck , :hand
+    def initialize(deck,hand)
+        @deck = deck
+        @hand = hand
+    end
 end

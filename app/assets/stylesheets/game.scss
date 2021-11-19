@@ -1,3 +1,48 @@
 // Place all the styles related to the Game controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+#hand{
+   margin: 1cm; 
+   display: flex;
+}
+
+.field{
+    display: flex;
+    justify-content: center
+}
+
+.row{
+    display: flex;
+    justify-content: center
+}
+
+.zone{
+    height: 120px;
+    width: 80px;
+    border: 1px solid black;
+}
+
+.player{
+    display: flex;
+    justify-content: space-evenly
+}
+.Card{
+    margin: 0.5cm;
+    height: 100px;
+    width: 70px;
+    border: 1px solid black;
+}
+
+.Redcard{
+    background-color: red;
+   
+}
+.Bluecard{
+    background-color: blue;
+}
+
+.deck{
+    background-color: brown;
+    height: 100px;
+    width: 70px;
+}

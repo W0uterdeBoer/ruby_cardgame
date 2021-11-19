@@ -11,4 +11,13 @@
         <span class = "zone">,</span><span class = "zone">,</span><span class = "zone">,</span>
     </p>
 </p>
-<p class = "player"><span class = hand> @gameState.cards[0]</span><span class = hand> players deck</span></p>
+<p class = "player">
+    <turbo-frame id = "hand"> 
+        <% i = 0 %>
+        <% while i < @gameState.hand.cards.size do %>
+            <span class = "<%= @gameState.hand.cards[i].class.to_s  %> Card" > </span>
+            <%i=i+1%>
+        <%end%>   
+    </turbo-frame>
+    <span class = deck> DECK</span>
+</p>
