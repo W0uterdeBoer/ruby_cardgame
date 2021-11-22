@@ -20,20 +20,18 @@ end
 
 class Deck < Location
     STARTINGSIZE = 40
-    attr_reader :hand 
+    attr_reader :hand , :cards
     def initialize(hand)
-        @hand = hand     
+        @hand = hand  
+        @cards = Array.new()   
     end
 
     def fill(cardlist)   
-        @cards=Array.new(STARTINGSIZE){
-            |card| card = cardlist.sample
-        }
+        @cards=cardlist.shuffle
     end
-
+  
     def draw()
         drawnCard = cards.shift
-        puts cards.length
 
         @hand.add(drawnCard)
         return nil
@@ -52,8 +50,9 @@ class Hand < Location
 
     def remove(card)
         cards.each_with_index do |cardInHand, i| 
-            if cardInHand == card
+            if cardInHand === card
                 removedCard = @cards.delete_at(i)
+                puts "A card got removed here"
             end
             removedCard
         end
@@ -61,5 +60,26 @@ class Hand < Location
 end
 
 class Field < Location
-    attr_reader :x, :y
+    attr_reader :cards
+    def initialize()
+        @cards = Array.new(3){Array.new(3)}
+    end
+
+    
+    def contains(card)
+        isInLocation = false
+        @cards.each do |row| 
+            row.each do |cardInLocation|
+                if card == cardInLocation
+                    isInLocation = true
+                end
+            end
+        end
+        return isInLocation
+    end 
+
+    def put(column, card)
+        @cards[column][0] = card
+        puts "A card got added to the field"
+    end
 end

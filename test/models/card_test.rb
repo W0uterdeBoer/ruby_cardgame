@@ -4,17 +4,15 @@ require_relative '../../app/models/Card.rb'
 require_relative '../../app/models/Player.rb'
 
 class CardTest < MiniTest::Test
+	DECKSIZE = 40
 	def setup	
-		player =Player.new("Wendy")
+		game = Game.new()
+		player =game.player
+		@field = player.field
 		@deck = player.deck
-
-		redcard = Redcard.new(player)
-        bluecard = Bluecard.new(player)
-        cardlist=[redcard, bluecard]
-
-		@deck.fill(cardlist)
 		@acard = @deck.cards[0]
 		@hand = player.hand	
+		@handSize = @hand.cards.length
 	end
 
 
@@ -28,7 +26,8 @@ class CardTest < MiniTest::Test
 	end
 
 	def test_deck_size_is_40
-		assert_equal(@deck.cards.length, 40)
+		startingHand = 5
+		assert_equal(@deck.cards.length, DECKSIZE-startingHand)
 	end
 
 	def test_card_in_deck_has_location_deck
@@ -45,10 +44,10 @@ class CardTest < MiniTest::Test
 	end
 
 	def test_draw
+		cardsInDeck = DECKSIZE-@handSize
 		@deck.draw()
-
-		assert_equal(39, @deck.cards.length)
-		assert_equal(1, @hand.cards.length)
+		assert_equal(cardsInDeck-1, @deck.cards.length)
+		assert_equal(@handSize + 1, @hand.cards.length)
 	end
 
 	def test_red_cards
@@ -58,12 +57,10 @@ class CardTest < MiniTest::Test
 	end
 
   def test_play_card
-    @field = Field.new()
-    5.times{@deck.draw()}
     playedCard=@hand.cards[0]
     playedCard.play(1)
 
 	assert_equal(false, @hand.contains(playedCard))
-    #assert_equal(true, @field.contains(playedCard))
+    assert_equal(true, @field.contains(playedCard))
   end
 end

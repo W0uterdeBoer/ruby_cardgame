@@ -1,15 +1,16 @@
 require_relative 'location.rb'
 
 class Game
-    attr_reader :gameState
+    attr_reader :gameState , :player
     def initialize()   
-        player= Player.new("Wendy")
+        @player= Player.new("Wendy")
 
-        redcard = Redcard.new(player)
-        bluecard = Bluecard.new(player)
-        cardlist=[redcard, bluecard]
-        
-		player.deck.fill(cardlist)	       
+        #redcard = Redcard.new(player)
+        #bluecard = Bluecard.new(player)
+        cards = [Redcard, Bluecard]
+        cardList = Array.new(40){|i| cards.sample.new(player)}
+
+		player.deck.fill(cardList)	       
         5.times{player.deck.draw()}
 
         @gameState = GameState.new(player.deck, player.hand, player.field)

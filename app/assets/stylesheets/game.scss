@@ -27,10 +27,12 @@
     justify-content: space-evenly
 }
 .Card{
+    display: flex;
     margin: 0.5cm;
     height: 100px;
     width: 70px;
     border: 1px solid black;
+    border-radius: 10px;
 }
 
 .Redcard{
@@ -43,6 +45,13 @@
 
 .deck{
     background-color: brown;
+    height: 100px;
+    width: 70px;
+    border-radius: 10px;
+}
+
+.button_to{
+    display:inline-block;
     height: 100px;
     width: 70px;
 }

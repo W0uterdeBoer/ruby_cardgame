@@ -35,6 +35,7 @@ private
         cardLocation = self.location
         puts cardLocation
         cardLocation.remove(self)
+        player.field.put(column, self)
     end
 end
 

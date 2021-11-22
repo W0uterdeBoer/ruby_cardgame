@@ -1,23 +1,30 @@
 <h1>Cardgame_name</h1>
 <p class = "opponent"><span class = deck> opponents deck</span><span class = hand> opponents hand</span></p>
 <p class = "field">
-    <p class = "row">
-        <span class = "zone">,</span><span class = "zone">,</span><span class = "zone">,</span>
-    </p>
-    <p class = "row">
-        <span class = "zone">,</span><span class = "zone">,</span><span class = "zone">,</span>
-    </p>
-    <p class = "row">
-        <span class = "zone">,</span><span class = "zone">,</span><span class = "zone">,</span>
-    </p>
+    <% i = 0 %>
+    <%while i < @gameState.field.cards.length do%>
+
+        <div><turbo-frame class = "row">
+            <% j = 0%>
+            <% while j < @gameState.field.cards[i].length do%>
+                <span class = "zone">
+                     
+                    <%=@gameState.field.cards[i][j]%></span>
+                <% j = j+1%>
+            <%end%>
+        </turbo-frame>
+        <% i = i+ 1%></div>
+    <% end %>
 </p>
-<p class = "player">
+<div class = "player">
     <turbo-frame id = "hand"> 
         <% i = 0 %>
-        <% while i < @gameState.hand.cards.size do %>
-            <span class = "<%= @gameState.hand.cards[i].class.to_s  %> Card" > </span>
+        <% while i < @gameState.hand.cards.size do %>           
+            <span class = "<%= @gameState.hand.cards[i].class.to_s  %> Card" >
+                <%= button_to "cards", {:action => "play"} %> 
+            </span>
             <%i=i+1%>
         <%end%>   
     </turbo-frame>
     <span class = deck> DECK</span>
-</p>
+</div>
