@@ -7,23 +7,23 @@ class CardTest < MiniTest::Test
 	DECKSIZE = 40
 	def setup	
 		game = Game.new()
-		player =game.player
-		@field = player.field
-		@deck = player.deck
+		@player =game.player
+		@field = @player.field
+		@deck = @player.deck
 		@acard = @deck.cards[0]
-		@hand = player.hand	
+		@hand = @player.hand	
 		@handSize = @hand.cards.length
 	end
 
 
 	def test_cards_are_instanciated	
 		# skip
-		assert_equal(@acard.player.name , 'Wendy')	
+		assert(@acard.class.ancestors.include? Card)	
 	end
 
-	def test_cards_in_deck_by_default
-		assert_instance_of(Deck,  @acard.location)
-	end
+	#def test_cards_in_deck_by_default
+	#	assert_instance_of(Deck,  @player.deck.contain)
+	#end
 
 	def test_deck_size_is_40
 		startingHand = 5
@@ -35,7 +35,7 @@ class CardTest < MiniTest::Test
 		result = Array.new(decksize, false)
 
 		@deck.cards.each_with_index do |card, i| 
-			if	card.location == @deck
+			if	@deck.contains(card)
 				result[i] = true
 			end
 		end
@@ -45,7 +45,7 @@ class CardTest < MiniTest::Test
 
 	def test_draw
 		cardsInDeck = DECKSIZE-@handSize
-		@deck.draw()
+		@player.draw()
 		assert_equal(cardsInDeck-1, @deck.cards.length)
 		assert_equal(@handSize + 1, @hand.cards.length)
 	end

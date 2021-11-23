@@ -20,21 +20,13 @@ end
 
 class Deck < Location
     STARTINGSIZE = 40
-    attr_reader :hand , :cards
-    def initialize(hand)
-        @hand = hand  
+    attr_reader  :cards
+    def initialize()
         @cards = Array.new()   
     end
 
     def fill(cardlist)   
         @cards=cardlist.shuffle
-    end
-  
-    def draw()
-        drawnCard = cards.shift
-
-        @hand.add(drawnCard)
-        return nil
     end
 end
 

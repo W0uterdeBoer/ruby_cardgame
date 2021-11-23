@@ -11,7 +11,7 @@ class Game
         cardList = Array.new(40){|i| cards.sample.new(player)}
 
 		player.deck.fill(cardList)	       
-        5.times{player.deck.draw()}
+        5.times{player.draw()}
 
         @gameState = GameState.new(player.deck, player.hand, player.field)
     end 

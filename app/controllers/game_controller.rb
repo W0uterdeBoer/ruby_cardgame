@@ -1,4 +1,5 @@
 class GameController < ApplicationController
+  attr_reader :aCardIsClicked
   def start
     @@game = Game.new()
     @gameState = @@game.gameState
