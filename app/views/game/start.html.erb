@@ -7,9 +7,12 @@
         <div><turbo-frame class = "row">
             <% j = 0%>
             <% while j < @gameState.field.cards[i].length do%>
-                <span class = "zone">
-                     
-                    <%=@gameState.field.cards[i][j]%></span>
+                <span class = "zone Card <%=@gameState.field.cards[j][2-i].class.to_s %>">
+                    <% if @aCardIsClicked && i == 2 %>
+                        <%= button_to "cards", {:action => "play"}, params: {column_id: j} %> 
+                    <% else %>
+                    <% end %>           
+                </span>
                 <% j = j+1%>
             <%end%>
         </turbo-frame>
@@ -21,7 +24,9 @@
         <% i = 0 %>
         <% while i < @gameState.hand.cards.size do %>           
             <span class = "<%= @gameState.hand.cards[i].class.to_s  %> Card" >
-                <%= button_to "cards", {:action => "play"} %> 
+                <% unless @aCardIsClicked %>
+                    <%= button_to "cards", {:action => "play"}, params: {card_id: i} %> 
+                <%end%>
             </span>
             <%i=i+1%>
         <%end%>   
