@@ -50,10 +50,10 @@ class CardTest < MiniTest::Test
 		assert_equal(@handSize + 1, @hand.cards.length)
 	end
 
-	def test_red_cards
+	def test_monster_cards
 		player = Player.new("Wendy")
-		card = Redcard.new(player)
-		assert_instance_of(Redcard, card)
+		card = MonsterCard.new(player)
+		assert_instance_of(MonsterCard, card)
 	end
 
   def test_play_card
@@ -62,5 +62,13 @@ class CardTest < MiniTest::Test
 
 	assert_equal(false, @hand.contains(playedCard))
     assert_equal(true, @field.contains(playedCard))
+  end
+
+  def test_move
+	played_card = MonsterCard.new(@player)
+	@hand.add(played_card)
+	@hand.cards[-1].play(0)
+	@field.cards[0][0].move("RF")
+	assert_equal(played_card, @field.cards[1][1])
   end
 end

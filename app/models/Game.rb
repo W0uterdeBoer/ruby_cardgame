@@ -7,7 +7,7 @@ class Game
 
         #redcard = Redcard.new(player)
         #bluecard = Bluecard.new(player)
-        cards = [Redcard, Bluecard]
+        cards = [MonsterCard, Bluecard]
         cardList = Array.new(40){|i| cards.sample.new(player)}
 
 		player.deck.fill(cardList)	       

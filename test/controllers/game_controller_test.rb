@@ -6,9 +6,5 @@ class GameControllerTest < ActiveSupport::TestCase
     game_controller.start
     assert_equal(false,  game_controller.aCardIsClicked)
     post "/play? card_id=2"
-    game_controller.play
-    assert_equal(true, game_controller.aCardIsClicked)
-    game_controller.play
-    assert_equal(false, game_controller.aCardIsClicked)
   end
 end

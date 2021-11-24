@@ -30,7 +30,24 @@ private
     end
 end
 
-class Redcard < Card
+class MonsterCard < Card
+    DIRECTIONS = [:LF, :F, :RF].freeze
+
+    def move(direction)
+
+        unless DIRECTIONS.include?(direction.to_sym)   
+            raise "Invalid move input"  
+        else
+            direction = direction.to_sym 
+        end 
+
+        position = @known_locations["field"].contains(self, true)
+        puts position
+        if position
+            puts "position exists"
+            @known_locations["field"].move(position, direction)
+        end
+    end 
 end
 
 class Bluecard < Card
