@@ -70,5 +70,6 @@ class CardTest < MiniTest::Test
 	@hand.cards[-1].play(0)
 	@field.cards[0][0].move("RF")
 	assert_equal(played_card, @field.cards[1][1])
+	assert_nil(@field.cards[0][0])
   end
 end

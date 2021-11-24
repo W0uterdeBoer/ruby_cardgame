@@ -104,7 +104,7 @@ class Field < Location
         puts "position #{position}, new_position: #{new_position}"
         if  @cards[new_position[0]][new_position[1]] == nil
             @cards[new_position[0]][new_position[1]] = @cards[position[0]][position[1]]
-            @cards[position[0]][position[1]] = @cards[new_position[0]][new_position[1]]
+            @cards[position[0]][position[1]] = nil
             puts "Card moved in field"
         end
     end

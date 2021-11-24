@@ -1,33 +1,53 @@
 <h1>Cardgame_name</h1>
-<p class = "opponent"><span class = deck> opponents deck</span><span class = hand> opponents hand</span></p>
-<p class = "field">
-    <% i = 0 %>
-    <%while i < @gameState.field.cards.length do%>
 
+<p class = "opponent"><span class = deck> opponents deck</span><span class = hand> opponents hand</span></p>
+
+<p class = "field">
+    <% j = 0 %>
+    <%while j < @gameState.field.cards.length do%>
         <div><turbo-frame class = "row">
-            <% j = 0%>
-            <% while j < @gameState.field.cards[i].length do%>
-                <span class = "zone Card <%=@gameState.field.cards[j][2-i].class.to_s %>">
-                    <% if @aCardIsClicked && i == 2 %>
-                        <%= button_to "cards", {:action => "play"}, params: {column_id: j} %> 
-                    <% else %>
-                    <% end %>           
+
+            <% i = 0%>
+            <% while i < @gameState.field.cards[j].length do%>
+                <span class = "zone Card <%=@gameState.field.cards[i][2-j].class.to_s %>">
+
+                    <% if @a_card_is_clicked%>
+                        <% if j == 2%>
+                            <%= button_to "cards", {:action => "play"}, params: {column_id: i} %> 
+                        <% end %>
+                    <% elsif !@a_card_is_moved%>
+                        <% if @gameState.field.cards[i][2-j].kind_of?(MonsterCard) && j != 0%>
+                            <%= button_to "cards", {:action => "move"}, params: {position: [i,2-j]} %> 
+                        <% end%>
+                    <%elsif @a_card_is_moved%>
+                        <% puts @position[0]%>
+                        <%if @position[1].to_i == 1-j && (@position[0].to_i - i).abs() < 2%>
+                            <% puts "#{i},#{j}" %>
+                            <%= button_to "cards", {:action => "move"}, params: {direction: i-@position[0].to_i} %>
+                        <% end%>
+                    <% end %>          
+
+
                 </span>
-                <% j = j+1%>
+
+                <% i = i+1%>
             <%end%>
-        </turbo-frame>
-        <% i = i+ 1%></div>
+            <% j = j+ 1%>
+        </turbo-frame></div>
     <% end %>
 </p>
+
 <div class = "player">
     <turbo-frame id = "hand"> 
         <% i = 0 %>
-        <% while i < @gameState.hand.cards.size do %>           
+        <% while i < @gameState.hand.cards.size do %>          
+
             <span class = "<%= @gameState.hand.cards[i].class.to_s  %> Card" >
-                <% unless @aCardIsClicked %>
+                <% unless @a_card_is_clicked %>
                     <%= button_to "cards", {:action => "play"}, params: {card_id: i} %> 
                 <%end%>
             </span>
+
             <%i=i+1%>
         <%end%>   
     </turbo-frame>

@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get "/articles", to: "articles#index"
   get '/game', to: "game#start"
   post "/play", to: "game#play"
+  post "/move", to: "game#move"
 end
