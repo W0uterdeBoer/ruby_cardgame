@@ -7,7 +7,7 @@ class CardTest < MiniTest::Test
 	DECKSIZE = 40
 	def setup	
 		game = Game.new()
-		@player =game.player
+		@player =game.player_one
 		@field = @player.field
 		@deck = @player.deck
 		@acard = @deck.cards[0]

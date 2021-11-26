@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   get '/game', to: "game#start"
   post "/play", to: "game#play"
   post "/move", to: "game#move"
+  post "/join/move", to: "player#move"
+  post "/join/play", to: "player#play"
+  get"/join", to: "player#join"
 end

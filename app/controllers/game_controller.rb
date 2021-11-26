@@ -1,5 +1,6 @@
 class GameController < ApplicationController
   attr_reader :aCardIsClicked
+  attr_reader :game
 
   def start
     @@game = Game.new()
@@ -42,6 +43,10 @@ class GameController < ApplicationController
     render "start"
   end 
 
+  def self.game
+    puts "Join asks the gamestate"
+    @@game 
+  end
   private
 
   def expose

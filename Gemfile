@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'solargraph'
 gem 'rb-readline', '>=0.5.5'
 gem 'turbo-rails'

@@ -6,9 +6,9 @@ class Card
         @known_locations = Hash.new
         @player = player
         #@known_locations["deck"] = player.deck
-        @known_locations["hand"] = player.hand
-        @known_locations["field"] = player.field
-        @startingDeck = player.deck
+        @known_locations["hand"] = @player.hand
+        @known_locations["field"] = @player.field
+        @startingDeck = @player.deck
     end     
 
 
@@ -26,6 +26,7 @@ private
     def getPlayed(column)
         puts "a card got played"
         @known_locations["hand"].remove(self)
+        puts @known_locations["field"]
         @known_locations["field"].put(column, self)
     end
 end
