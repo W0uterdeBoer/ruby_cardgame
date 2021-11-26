@@ -1,6 +1,18 @@
 <h1>Cardgame_name</h1>
+<%this_player = @gameState.player_one.name%>
+<div class = "player">
+    <turbo-frame id = "hand"> 
+        <% i = 0 %>
+        <% while i < @gameState.player_two_hand.cards.size do %>          
 
-<p class = "opponent"><span class = deck> opponents deck</span><span class = hand> opponents hand</span></p>
+            <span class = "Cardback" >
+            </span>
+
+            <%i=i+1%>
+        <%end%>   
+    </turbo-frame>
+    <span class = deck> DECK</span>
+</div>
 
 <p class = "field">
     <% j = 0 %>
@@ -9,8 +21,14 @@
 
             <% i = 0%>
             <% while i < @gameState.field.cards[j].length do%>
-                <span class = "zone Card <%=@gameState.field.cards[i][2-j].class.to_s %>">
+                <%zone_content = @gameState.field.cards[i][2-j]%>
+                <%if zone_content != nil %>
+                    <% card_owner = zone_content.player_name %>
+                <% else %>
+                    <% card_owner = this_player%>
+                <%end%>
 
+                <span class = "zone Card <%=zone_content.class.to_s %> <%= "Opponent" if card_owner != this_player%>">
                     <% if @a_card_is_clicked%>
                         <% if j == 2%>
                             <%= button_to "cards", {:action => "play"}, params: {column_id: i} %> 

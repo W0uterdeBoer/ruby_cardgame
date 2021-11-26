@@ -1,7 +1,7 @@
 require_relative 'location.rb'
 
 class Card 
-
+    attr_reader :player_name, :player
     def initialize(player)
         @known_locations = Hash.new
         @player = player
@@ -9,6 +9,7 @@ class Card
         @known_locations["hand"] = @player.hand
         @known_locations["field"] = @player.field
         @startingDeck = @player.deck
+        @player_name = player.name
     end     
 
 

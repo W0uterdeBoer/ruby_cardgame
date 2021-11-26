@@ -81,8 +81,13 @@ class Field < Location
 
 
     def put(column, card)
-        @cards[column][0] = card
-        puts "A card got added to the field at position #{column} #{0}"
+        if card.player.number == 1
+            row = 0
+        elsif card.player.number == 2
+            row = 2
+        end
+        @cards[column][row] = card
+        puts "A card got added to the field at position #{column} #{row}"
     end
 
     def move(position, direction)

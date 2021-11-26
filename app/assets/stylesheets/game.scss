@@ -17,8 +17,8 @@
 }
 
 .zone{
-    height: 120px;
-    width: 80px;
+    height: 150px;
+    width: 100px;
     border: 1px solid black;
 }
 
@@ -29,15 +29,30 @@
 .Card{
     display: flex;
     margin: 0.5cm;
-    height: 100px;
-    width: 70px;
+    height: 150px;
+    width: 100px;
     border: 1px solid black;
     border-radius: 10px;
 }
 
+.Opponent{
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+}
+
+.Cardback{
+    margin: 0.5cm;
+    height: 150px;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: brown;
+}
+
 .MonsterCard{
     background-color: red;
-   
+    background-image: url("evil_duck.jpg");
+    background-size: cover
 }
 .Bluecard{
     background-color: blue;
