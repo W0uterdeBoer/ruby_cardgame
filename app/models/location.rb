@@ -1,5 +1,7 @@
+
 require_relative '../models/Card.rb'
 require_relative 'Player.rb'
+
 
 class Location
     attr_reader :cards

@@ -160,6 +160,7 @@ GEM
     rb-readline (0.5.5)
     redis (4.5.1)
     regexp_parser (2.1.1)
+    require_all (3.0.0)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
@@ -262,6 +263,7 @@ DEPENDENCIES
   rails (~> 6.1.4, >= 6.1.4.1)
   rb-readline (>= 0.5.5)
   redis (~> 4.0)
+  require_all
   sass-rails (>= 6)
   selenium-webdriver
   solargraph

@@ -27,9 +27,15 @@
                 <% else %>
                     <% card_owner = this_player%>
                 <%end%>
-
-                <span class = "zone Card <%=zone_content.class.to_s %> <%= "Opponent" if card_owner != this_player%>">
+                
+                <span class = "zone Card <%=zone_content.class.to_s %> <%= "Opponent" if card_owner != this_player%>" >
+                    <%if zone_content != nil%>
+                        <%image_link = "card_pictures/" + zone_content.url if zone_content != nil %>
+                        <% alt = zone_content.class if zone_content != nil%>
+                        <img src= <%="#{image_link}"%> alt=<%="#{alt}"%>>
+                    <% end%>
                     <% if @a_card_is_clicked%>
+                   
                         <% if j == 2%>
                             <%= button_to "cards", {:action => "play"}, params: {column_id: i} %> 
                         <% end %>
@@ -44,7 +50,7 @@
                             <%= button_to "cards", {:action => "move"}, params: {direction: i-@position[0].to_i} %>
                         <% end%>
                     <% end %>          
-
+                   
 
                 </span>
 
@@ -59,11 +65,15 @@
     <turbo-frame id = "hand"> 
         <% i = 0 %>
         <% while i < @gameState.hand.cards.size do %>          
-
-            <span class = "<%= @gameState.hand.cards[i].class.to_s  %> Card" >
+            
+            <%hand_content = @gameState.hand.cards[i]%>
+            <span class = "Card" >
+                <%image_link = "card_pictures/" + hand_content.url if hand_content != nil %>
+                <% alt = hand_content.class if hand_content != nil%>
+                <img src= <%="#{image_link}"%> alt=<%="#{alt}"%>> 
                 <% unless @a_card_is_clicked %>
                     <%= button_to "cards", {:action => "play"}, params: {card_id: i} %> 
-                <%end%>
+                <%end%>               
             </span>
 
             <%i=i+1%>

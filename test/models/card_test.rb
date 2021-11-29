@@ -1,8 +1,9 @@
+require 'require_all'
 require "./test/test_helper"
 require 'minitest/autorun'
 require_relative '../../app/models/Card.rb'
 require_relative '../../app/models/Player.rb'
-
+require_rel '../../app/models/concrete_cards'
 class CardTest < MiniTest::Test
 	DECKSIZE = 40
 	def setup	
@@ -72,4 +73,6 @@ class CardTest < MiniTest::Test
 	assert_equal(played_card, @field.cards[1][1])
 	assert_nil(@field.cards[0][0])
   end
+
+
 end

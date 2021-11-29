@@ -11,9 +11,16 @@ class GameController < ApplicationController
   
   def play
     if  session[:playing]
-      column = params[:column_id]
+      
       card = @@game.gameState.hand.cards[session[:card_id].to_i]
-      card.play(column.to_i)
+      if card.class.to_s == "Skeleton"
+        column = params[:column_id]
+        card.play(column.to_i)
+      else 
+        column = Skeleton.new(@@game.player_one)
+        card.play(column)
+      end
+      
       session[:playing] = false
     else
       session[:card_id] = params[:card_id]

@@ -1,14 +1,16 @@
+require 'require_all'
 require_relative 'location.rb'
-
+require_rel 'concrete_cards'
 class Game
     attr_reader :gameState , :player_one
     def initialize()   
         @player_one = Player.new("Wendy")
         @player_two = Player.new("Mandy", player_one.field)
 
-        cards = [MonsterCard, Bluecard]
-        setup(@player_one, cards)
-        setup(@player_two, cards)
+        cards = [MonsterCard, Spell]
+        concrete_cards =[Skeleton,FortifyUndead]
+        setup(@player_one, concrete_cards)
+        setup(@player_two, concrete_cards)
 
         @gameState = GameState.new(@player_one, @player_two)
     end 

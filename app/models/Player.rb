@@ -5,7 +5,6 @@ class Player
       @name = args[0]
       @hand = Hand.new()
       @deck = Deck.new()     
-      puts "#{args[0]} , #{args[1]}"
       @number = args.size;
       case @number
         when 1
@@ -14,8 +13,6 @@ class Player
           @field= args[1]
       end
     end
-
-
 
     def draw()
       drawnCard = @deck.cards.shift

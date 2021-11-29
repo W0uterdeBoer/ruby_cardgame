@@ -1,6 +1,7 @@
 require_relative 'location.rb'
+require_relative "card_decorator.rb"
 
-class Card 
+class Card < Component
     attr_reader :player_name, :player
     def initialize(player)
         @known_locations = Hash.new
@@ -21,6 +22,7 @@ class Card
 
 private
     def playCondition()
+       puts "playcondition unlocked"
        @known_locations["hand"].contains(self)
     end
 
@@ -50,9 +52,13 @@ class MonsterCard < Card
             @known_locations["field"].move(position, direction)
         end
     end 
+
+    def type
+        raise "type not implemented"
+    end 
 end
 
-class Bluecard < Card
+class Spell < Card
 end
 
 
