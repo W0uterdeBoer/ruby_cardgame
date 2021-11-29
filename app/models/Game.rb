@@ -5,19 +5,21 @@ class Game
     def initialize()   
         @player_one = Player.new("Wendy")
         @player_two = Player.new("Mandy", player_one.field)
-        #redcard = Redcard.new(player_one)
-        #bluecard = Bluecard.new(player_one)
-        cards = [MonsterCard, Bluecard]
-        card_list_one = Array.new(40){|i| cards.sample.new(player_one)}
-        card_list_two = Array.new(40){|i| cards.sample.new(@player_two)}
 
-		player_one.deck.fill(card_list_one)	
-        @player_two.deck.fill(card_list_two)       
-        5.times{player_one.draw()}
-        5.times{@player_two.draw()}
+        cards = [MonsterCard, Bluecard]
+        setup(@player_one, cards)
+        setup(@player_two, cards)
 
         @gameState = GameState.new(@player_one, @player_two)
     end 
+    private
+
+    def setup(player, cards)
+        deck_size = 40
+        card_list = Array.new(deck_size){|i| cards.sample.new(player)}
+        player.deck.fill(card_list)
+        5.times{player.draw()}
+    end
 end
 
 class GameState
