@@ -9,12 +9,12 @@
     <%image_link = "card_pictures/" + card.url if card != nil %>
     <% alt = card.class if card != nil%>
     <img src= <%="#{image_link}"%> alt=<%="#{alt}"%>> 
-    
+    <%= source%>
     <%case source %>
         <%when "hand" %>
             <%= render partial: 'hand_button', locals: {card: card, position: position} %>
         <% when "field"%>
-             <%= render partial: 'field_button', locals: {card: card, position: position} %>
+             <%= render partial: 'field_button', locals: {card: card, position: position, player: player} %>
         <% end%>
 
     <% if card.kind_of? MonsterCard%>

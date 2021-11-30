@@ -10,11 +10,11 @@
             <% i = 0%>
             <% while i < @gameState.field.cards[j].length do%>
                 <%zone_content = @gameState.field.cards[i][2-j]%>
-                <%= render partial: 'card', locals: {card: zone_content, player: this_player , position:[i,j], source: "field"} %>
+                <%= render partial: 'card', locals: {card: zone_content, player: this_player , position:[i,2-j], source: "field"} %>
 
                 <% i = i+1%>
             <%end%>
-            <% j = j+ 1%>
+            <% j = j + 1%>
         </turbo-frame></div>
     <% end %>
 </p>

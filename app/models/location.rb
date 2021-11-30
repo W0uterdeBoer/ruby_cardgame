@@ -94,16 +94,20 @@ class Field < Location
 
     def move(position, direction)
         new_position = position.clone
-
+        if @cards[position[0]][position[1]].player.number == 1
+            forward_direction = 1
+        else 
+            forward_direction = -1 
+        end
         case direction
         when :F
-            new_position[1] += 1
+            new_position[1] += forward_direction
         when :LF
             new_position[0] -= 1
-            new_position[1] += 1
+            new_position[1] += forward_direction
         when :RF
             new_position[0] += 1
-            new_position[1] += 1        
+            new_position[1] += forward_direction        
         else
             raise "Not a known position"            
         end  
