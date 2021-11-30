@@ -1,0 +1,26 @@
+<%if card != nil %>
+    <% card_owner = card.player_name %>
+<% else %>
+    <% card_owner = player%>
+<%end%>
+
+<span class = "Card <%= "Opponent" if card_owner != player%> <% "zone" if source == "field"%> " >
+
+    <%image_link = "card_pictures/" + card.url if card != nil %>
+    <% alt = card.class if card != nil%>
+    <img src= <%="#{image_link}"%> alt=<%="#{alt}"%>> 
+    
+    <%case source %>
+        <%when "hand" %>
+            <%= render partial: 'hand_button', locals: {card: card, position: position} %>
+        <% when "field"%>
+             <%= render partial: 'field_button', locals: {card: card, position: position} %>
+        <% end%>
+
+    <% if card.kind_of? MonsterCard%>
+        <span  style = "display:bottom"> 
+           <%= "atk: #{card.atk}, def: #{card.def}"%>
+        </span>   
+    <% end%>     
+       
+</span>  

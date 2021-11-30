@@ -1,0 +1,21 @@
+<% i, j = position[0], position[1]%>
+
+<% if @a_card_is_clicked%>  
+    <% if j == 2%>
+        <%= button_to "cards", {:action => "play"}, params: {column_id: i} %> 
+    <% end %>
+
+<% elsif !@a_card_is_moved%>
+    <% if @gameState.field.cards[i][2-j].kind_of?(MonsterCard) && j != 0%>
+        <%= button_to "cards", {:action => "move"}, params: {position: [i,2-j]} %> 
+    <% end%>
+
+<%elsif @a_card_is_moved%>
+    <% puts @position[0]%>
+    
+    <%if @position[1].to_i == 1-j && (@position[0].to_i - i).abs() < 2%>
+        <% puts "#{i},#{j}" %>
+        <%= button_to "cards", {:action => "move"}, params: {direction: i-@position[0].to_i} %>
+    <% end%>
+
+<% end %>          
