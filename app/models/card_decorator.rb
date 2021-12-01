@@ -30,11 +30,14 @@ class AlterStatsDecorator < CardDecorator
     # Decorators may call parent implementation of the operation, instead of
     # calling the wrapped object directly. This approach simplifies extension of
     # decorator classes.
+    DIRECTIONS = [:LF, :F, :RF].freeze #temporary
     def initialize(card, atkgain, defgain)
+
       super(card)
       @atkgain = atkgain
       @defgain = defgain
     end
+
     def atk
         puts "atk got called in decorator"
         @component.atk + @atkgain
@@ -43,4 +46,23 @@ class AlterStatsDecorator < CardDecorator
     def def
         @component.def + @defgain
     end
+
+    #ugly!!!! (actual problem: self refers to @component, not to decorator)
+    def move(direction)
+      
+
+      unless DIRECTIONS.include?(direction.to_sym)   
+          raise "Invalid move input"  
+      else
+          direction = direction.to_sym 
+      end 
+      
+      #found the issue, self refers to monstercard, not to decorator
+      position = @component.player.field.contains(self, true)
+      puts "position: #{position}" 
+      if position
+          puts "position exists"
+          @component.player.field.move(position, direction)
+      end
+    end 
 end

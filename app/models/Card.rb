@@ -2,11 +2,12 @@ require_relative 'location.rb'
 require_relative "card_decorator.rb"
 
 class Card < Component
-    attr_reader :player_name, :player
+
+    attr_reader :player_name, :player 
     def initialize(player)
         @known_locations = Hash.new
         @player = player
-        #@known_locations["deck"] = player.deck
+        #@known_locations["deck"] = player.deck 
         @known_locations["hand"] = @player.hand
         @known_locations["field"] = @player.field
         @startingDeck = @player.deck

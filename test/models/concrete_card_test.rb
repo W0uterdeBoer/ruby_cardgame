@@ -9,8 +9,11 @@ class CardTest < MiniTest::Test
         @player =game.player_one
         @hand = @player.hand
         @field = @player.field
+        @fortify = FortifyUndead.new(@player)
+        @hand.add(@fortify)
         @skelly = Skeleton.new(@player)
         @hand.add(@skelly)
+
     end
 
     def test_skeleton
@@ -23,14 +26,19 @@ class CardTest < MiniTest::Test
         assert_equal("undead", @skelly.type)
     end
     def test_fortify
-       
-        fortify = FortifyUndead.new(@player)
-        @hand.add(fortify)
         @skelly.play(0)
-        @skelly = fortify.play(0,0)
-        puts @skelly.class
+        @skelly = @fortify.play(0,0)
+
         assert_equal(2, @skelly.atk)
         assert_equal(2, @skelly.def)
         assert_equal(@skelly, @field.cards[0][0])
+    end
+
+    def test_fortified_skeleton_moves
+        @skelly.play(0)
+        @skelly = @fortify.play(0,0)
+        @skelly.move("F")
+        puts(@skelly.class)
+        assert_equal(@skelly, @field.cards[0][1])
     end
 end
