@@ -23,13 +23,17 @@ class FortifyUndead < Spell
       @url = "fortifyundead.png"
     end
 
-    def play(card)
-        if self.playCondition(card)
-            puts self.playCondition(card)
-            getPlayed(card)
+    def play(i,j)
+        target = player.field.cards[i][j]
+        
+        if self.playCondition(target)
+            buffed_target = getPlayed(target)
+            player.field.cards[i][j] = buffed_target
+
         else
             raise "PlayCondition failed"
         end
+        return buffed_target
     end
 
     def playCondition(card)
@@ -39,6 +43,8 @@ class FortifyUndead < Spell
     def getPlayed(card)
         puts "#{card.class} in getPlayed 1"
         card = AlterStatsDecorator.new(card,1,1)
+        self.player.hand.remove(self)
+        return card
     end
 end
 

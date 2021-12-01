@@ -17,8 +17,12 @@ class CardDecorator < Component
     # The Decorator delegates all work to the wrapped component.
     def method_missing(m, *args, &block)
       puts "Method #{m.to_s} was missing, delegating to component"
-      return @component.send(m.to_s) 
+      return @component.send(m.to_s, *args, &block) 
       puts "Sending back"
+    end
+    # How many methods do I need to explicitly reroute?
+    def kind_of?(input)
+      @component.kind_of?(input)
     end
 end
 

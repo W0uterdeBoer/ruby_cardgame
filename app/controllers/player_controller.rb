@@ -7,7 +7,11 @@ class PlayerController < ApplicationController
         if  session[:playing]
             column = params[:column_id]
             card = @@game.gameState.player_two_hand.cards[session[:card_id].to_i]
-            card.play(column.to_i)
+            if card.class.to_s == "Skeleton"        
+                card.play(column.to_i)
+            elsif card.class.to_s == "FortifyUndead" 
+              card.play(2,column.to_i)
+            end
             session[:playing] = false
           else
             session[:card_id] = params[:card_id]

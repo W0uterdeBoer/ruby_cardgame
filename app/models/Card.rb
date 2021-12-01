@@ -17,6 +17,8 @@ class Card < Component
     def play(column) 
         if self.playCondition() 
             getPlayed(column)
+        else 
+            raise "playcondition was #{self.playCondition}"
         end        
     end
 
@@ -44,9 +46,10 @@ class MonsterCard < Card
         else
             direction = direction.to_sym 
         end 
-
+        
+        #found the issue, self refers to monstercard, not to decorator
         position = @known_locations["field"].contains(self, true)
-        puts position
+        puts "position: #{position}" 
         if position
             puts "position exists"
             @known_locations["field"].move(position, direction)

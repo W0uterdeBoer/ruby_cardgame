@@ -5,11 +5,12 @@
 <%end%>
 
 <span class = "Card <%= "Opponent" if card_owner != player%> <% "zone" if source == "field"%> " >
+    <%if card != nil%>
+        <%image_link = card.url %>
+        <% alt = card.class%>
+        <%= image_tag(image_link, :alt => alt) %>
+    <%end %>
 
-    <%image_link = "card_pictures/" + card.url if card != nil %>
-    <% alt = card.class if card != nil%>
-    <img src= <%="#{image_link}"%> alt=<%="#{alt}"%>> 
-    <%= source%>
     <%case source %>
         <%when "hand" %>
             <%= render partial: 'hand_button', locals: {card: card, position: position} %>

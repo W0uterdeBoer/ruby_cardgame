@@ -69,7 +69,6 @@ class Field < Location
                     puts "Card found"
                     is_in_location = true
                     position = [i,j]
-                    puts "position: #{position}"
                 end
             end
         end
@@ -117,6 +116,32 @@ class Field < Location
             @cards[new_position[0]][new_position[1]] = @cards[position[0]][position[1]]
             @cards[position[0]][position[1]] = nil
             puts "Card moved in field"
+        else
+            fight( position,new_position)
         end
+    end
+
+    private
+
+    def fight(position, new_position)
+        card =  @cards[position[0]][position[1]]
+        opponent_card = @cards[new_position[0]][new_position[1]]
+        
+        if card.kind_of?(MonsterCard) && opponent_card.kind_of?(MonsterCard)
+            atk_difference = card.atk - opponent_card.atk
+        else
+            "raise: one of the fighting cards is not a monster"
+        end
+
+        if atk_difference > 0
+            @cards[new_position[0]][new_position[1]] = card
+            @cards[position[0]][position[1]] = nil
+        elsif atk_difference == 0
+            @cards[new_position[0]][new_position[1]] = nil
+            @cards[position[0]][position[1]] = nil
+        else 
+            @cards[position[0]][position[1]] = nil
+        end
+
     end
 end

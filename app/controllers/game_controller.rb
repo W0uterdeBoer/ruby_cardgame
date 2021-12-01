@@ -13,12 +13,11 @@ class GameController < ApplicationController
     if  session[:playing]
       
       card = @@game.gameState.hand.cards[session[:card_id].to_i]
-      if card.class.to_s == "Skeleton"
-        column = params[:column_id]
+      column = params[:column_id]
+      if card.class.to_s == "Skeleton"        
         card.play(column.to_i)
-      else 
-        column = Skeleton.new(@@game.player_one)
-        card.play(column)
+      elsif card.class.to_s == "FortifyUndead" 
+        card.play(0,column.to_i)
       end
       
       session[:playing] = false

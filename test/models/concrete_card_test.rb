@@ -8,7 +8,9 @@ class CardTest < MiniTest::Test
         game = Game.new()
         @player =game.player_one
         @hand = @player.hand
+        @field = @player.field
         @skelly = Skeleton.new(@player)
+        @hand.add(@skelly)
     end
 
     def test_skeleton
@@ -24,9 +26,11 @@ class CardTest < MiniTest::Test
        
         fortify = FortifyUndead.new(@player)
         @hand.add(fortify)
-        @skelly = fortify.play(@skelly)
+        @skelly.play(0)
+        @skelly = fortify.play(0,0)
         puts @skelly.class
         assert_equal(2, @skelly.atk)
         assert_equal(2, @skelly.def)
+        assert_equal(@skelly, @field.cards[0][0])
     end
 end

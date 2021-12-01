@@ -8,9 +8,7 @@
         <div><turbo-frame class = "row">
 
             <% i = 0%>
-            <%= @gameState.field.cards[j].length%>
             <% while i < @gameState.field.cards[j].length do%>
-                <%= i%>
                 <%zone_content = @gameState.field.cards[2-i][j]%>
                 <%= render partial: 'card', locals: {card: zone_content, player: this_player , position:[2-i,j], source: "field"} %>
 

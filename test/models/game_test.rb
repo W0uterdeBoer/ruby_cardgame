@@ -58,20 +58,12 @@ class CardTest < MiniTest::Test
 	end
 
   def test_play_card
-    playedCard=@hand.cards[0]
+    playedCard=Skeleton.new(@player)
+	@hand.add(playedCard)
     playedCard.play(1)
 
 	assert_equal(false, @hand.contains(playedCard))
     assert_equal(true, @field.contains(playedCard))
-  end
-
-  def test_move
-	played_card = MonsterCard.new(@player)
-	@hand.add(played_card)
-	@hand.cards[-1].play(0)
-	@field.cards[0][0].move("RF")
-	assert_equal(played_card, @field.cards[1][1])
-	assert_nil(@field.cards[0][0])
   end
 
 
