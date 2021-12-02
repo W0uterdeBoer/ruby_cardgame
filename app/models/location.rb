@@ -46,7 +46,6 @@ class Hand < Location
         cards.each_with_index do |cardInHand, i| 
             if cardInHand === card
                 removedCard = @cards.delete_at(i)
-                puts "A card got removed from the hand at position #{i}"
             end
             removedCard
         end
@@ -65,7 +64,7 @@ class Field < Location
         position = nil
         @cards.each_with_index do |row, i| 
             row.each_with_index do |card_in_location, j|
-                if card == card_in_location
+                if card === card_in_location
                     puts "Card found"
                     is_in_location = true
                     position = [i,j]
@@ -88,7 +87,6 @@ class Field < Location
             row = 2
         end
         @cards[column][row] = card
-        puts "A card got added to the field at position #{column} #{row}"
     end
 
     def move(position, direction)

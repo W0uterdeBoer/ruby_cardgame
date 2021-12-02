@@ -10,7 +10,7 @@ class PlayerController < ApplicationController
             if card.class.to_s == "Skeleton"        
                 card.play(column.to_i)
             elsif card.class.to_s == "FortifyUndead" 
-              card.play(2,column.to_i)
+              card.play(column.to_i, 2)
             end
             session[:playing] = false
           else

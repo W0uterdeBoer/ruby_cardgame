@@ -4,6 +4,7 @@ class Component
     def operation
       raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
     end
+    
 end
 
 class CardDecorator < Component
@@ -18,12 +19,16 @@ class CardDecorator < Component
     def method_missing(m, *args, &block)
       puts "Method #{m.to_s} was missing, delegating to component"
       return @component.send(m.to_s, *args, &block) 
-      puts "Sending back"
     end
     # How many methods do I need to explicitly reroute?
     def kind_of?(input)
       @component.kind_of?(input)
     end
+
+    def ===(card)
+      @component === card
+    end
+
 end
 
 class AlterStatsDecorator < CardDecorator
@@ -46,23 +51,5 @@ class AlterStatsDecorator < CardDecorator
     def def
         @component.def + @defgain
     end
-
-    #ugly!!!! (actual problem: self refers to @component, not to decorator)
-    def move(direction)
-      
-
-      unless DIRECTIONS.include?(direction.to_sym)   
-          raise "Invalid move input"  
-      else
-          direction = direction.to_sym 
-      end 
-      
-      #found the issue, self refers to monstercard, not to decorator
-      position = @component.player.field.contains(self, true)
-      puts "position: #{position}" 
-      if position
-          puts "position exists"
-          @component.player.field.move(position, direction)
-      end
-    end 
+    
 end

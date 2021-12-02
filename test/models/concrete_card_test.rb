@@ -34,11 +34,19 @@ class CardTest < MiniTest::Test
         assert_equal(@skelly, @field.cards[0][0])
     end
 
-    def test_fortified_skeleton_moves
+    def test_fortified_is_on_field
         @skelly.play(0)
         @skelly = @fortify.play(0,0)
         @skelly.move("F")
         puts(@skelly.class)
         assert_equal(@skelly, @field.cards[0][1])
+    end
+
+    def test_test
+        puts "starting === test"
+        @skelly.play(0)
+        skelly_imposter = @fortify.play(0,0)
+        assert_equal(true, skelly_imposter === @skelly)
+        assert_equal(true, @skelly === skelly_imposter)
     end
 end

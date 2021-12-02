@@ -23,6 +23,15 @@ class Card < Component
         end        
     end
 
+    def ===(card)
+        puts "comparing #{self.class} and #{card.class}"
+        if card.respond_to?("component")
+            return self === card.component
+        else
+            self == card
+        end
+    end
+
 private
     def playCondition()
        puts "playcondition unlocked"
@@ -35,6 +44,7 @@ private
         puts @known_locations["field"]
         @known_locations["field"].put(column, self)
     end
+   
 end
 
 class MonsterCard < Card
