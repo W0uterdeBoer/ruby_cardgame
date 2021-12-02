@@ -44,7 +44,6 @@ class AlterStatsDecorator < CardDecorator
     end
 
     def atk
-        puts "atk got called in decorator"
         @component.atk + @atkgain
     end
 

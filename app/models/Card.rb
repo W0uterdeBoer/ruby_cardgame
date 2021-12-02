@@ -24,7 +24,6 @@ class Card < Component
     end
 
     def ===(card)
-        puts "comparing #{self.class} and #{card.class}"
         if card.respond_to?("component")
             return self === card.component
         else

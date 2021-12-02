@@ -1,3 +1,4 @@
+require 'pry'
 class GameController < ApplicationController
   attr_reader :aCardIsClicked
   attr_reader :game
@@ -11,7 +12,7 @@ class GameController < ApplicationController
   
   def play
     if  session[:playing]
-      
+      puts "GAME PLAY CALLED"
       card = @@game.gameState.hand.cards[session[:card_id].to_i]
       column = params[:column_id]
       if card.class.to_s == "Skeleton"        
@@ -26,8 +27,7 @@ class GameController < ApplicationController
       
       session[:playing] = true     
     end    
-    self.expose  
-    render "start" 
+    self.update
   end
 
   def move
@@ -53,12 +53,18 @@ class GameController < ApplicationController
     puts "Join asks the gamestate"
     @@game 
   end
+
+  def update
+    self.expose
+    render "start"
+  end
   private
 
   def expose
     @a_card_is_clicked = session[:playing]
     @a_card_is_moved = session[:moving]
     @gameState = @@game.gameState
+    puts "moving after p1 #{session[:moving]}"
   end
 
 end

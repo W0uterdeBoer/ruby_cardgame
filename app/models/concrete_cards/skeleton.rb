@@ -11,7 +11,6 @@ class Skeleton < MonsterCard
     end
 
     def atk
-        puts "atk got called with value #{@atk}"
         @atk
     end
 end
