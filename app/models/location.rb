@@ -93,10 +93,10 @@ class Field < Location
         
         new_position = find_new_position(position, direction)
         puts "position #{position}, new_position: #{new_position}"
-        if new_position[1] == -1
-            puts "player one got attacked"
-        elsif new_position[1] == 3
-            puts "player two got attacked"     
+        if new_position[1] == -1 || new_position[1] == 3
+            card = @cards[position[0]][position[1]]
+            card.player.opponent.hp -= 1
+            @cards[position[0]][position[1]] = nil
         elsif   @cards[new_position[0]][new_position[1]] == nil
             @cards[new_position[0]][new_position[1]] = @cards[position[0]][position[1]]
             @cards[position[0]][position[1]] = nil

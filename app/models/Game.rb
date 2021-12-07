@@ -7,6 +7,8 @@ class Game
         @player_one = Player.new("Wendy")
         @player_two = Player.new("Mandy", player_one.field)
 
+        @player_one.opponent = @player_two
+        @player_two.opponent = @player_one
         cards = [MonsterCard, Spell]
         concrete_cards =[Skeleton,FortifyUndead]
         setup(@player_one, concrete_cards)

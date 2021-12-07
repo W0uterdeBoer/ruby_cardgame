@@ -1,10 +1,10 @@
 <%if card != nil %>
-    <% card_owner = card.player_name %>
+    <% card_owner = card.player.name %>
 <% else %>
-    <% card_owner = player%>
+    <% card_owner = player.name%>
 <%end%>
 
-<span class = "Card <%= "Opponent" if card_owner != player%> <% "zone" if source == "field"%> " >
+<span class = "Card <%= "Opponent" if card_owner != player.name%> <% "zone" if source == "field"%> " >
     <%if card != nil%>
         <%image_link = card.url %>
         <% alt = card.class%>

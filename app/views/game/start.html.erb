@@ -1,5 +1,7 @@
-<h1>Cardgame_name</h1>
-<%this_player = @gameState.player_one.name%>
+
+<%this_player = @gameState.player_one%>
+
+<h1><%= "#{this_player.name} (#{this_player.hp}) vs #{this_player.opponent.name} (#{this_player.opponent.hp})" %></h1>
 <%= render partial: 'opponent_hand', locals: {opponent: @gameState.player_two} %>
 
 <p class = "field">

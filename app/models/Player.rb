@@ -1,6 +1,7 @@
 require 'location.rb'
 class Player
-    attr_reader  :name ,:deck ,:hand ,:field, :number, :hp
+    attr_reader  :name ,:deck ,:hand ,:field, :number
+    attr_accessor :opponent, :hp
     def initialize(*args)
       @name = args[0]
       @hand = Hand.new()
@@ -20,6 +21,7 @@ class Player
 
       @hand.add(drawnCard)
       return nil
-  end
+    end
+
 
 end

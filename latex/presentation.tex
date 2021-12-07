@@ -1,0 +1,81 @@
+\documentclass[17pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usetheme{CambridgeUS}
+\usepackage{setspace}
+\onehalfspacing
+
+
+\begin{document}
+	\author{Wouter de Boer}
+	\title{card game setup}
+	%\subtitle{}
+	%\logo{}
+	\institute{Sogyo}
+	\date{\today}
+	\subject{Individual project}
+	\begin{frame}[plain]
+		\maketitle
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Initials plans}
+
+		\begin{itemize}
+			\item 2 players card game.
+			\item players move cards over the field.
+			\item exact rules to be determined.
+				\item make a setup that is scalable.
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Evolution of the plans}
+	\begin{itemize}
+		\item  Minimum vertical slice achieved.
+		\item  Did not meet sprint goals.
+		\item learning vs meeting goals.
+		\item Lower demands to get things done.
+	\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Architecture}
+		\framesubtitle{Ruby, Ruby, Ruby. More specifically, ruby on rails.}
+		\begin{itemize}
+		\item Model: plain ruby
+		\item View: erb-files and css
+		\item Control: ruby, heavy rails dependency.
+		\item Channels, for web-sockets.
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Architecture, some specifics}
+		\begin{itemize}
+			\item No-db (rails, please)
+			\item gems: mini-test
+			\item gem: turbo-frames/streams
+			\item gem: pry (in the later stages)
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Objectives}
+		\begin{itemize}
+		\item Technical: Learning ruby/ rails
+		\item Personal: Structuring a bigger project.
+		\item Making choices is difficult
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Take-aways}
+		\begin{itemize}
+		\item Working with, against and around a framework.
+		\item Minimum viable product also goes for architecture.
+		\item Distinction between theoretical understanding and a working app.
+		\end{itemize}
+	
+		
+	\end{frame}
+\end{document}

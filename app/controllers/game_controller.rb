@@ -56,8 +56,7 @@ class GameController < ApplicationController
   
   def draw
     @@game.gameState.player_one.draw()
-    self.expose
-    render "start"
+    self.update
   end
 
   def update

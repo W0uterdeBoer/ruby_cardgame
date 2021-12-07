@@ -1,6 +1,6 @@
 <% i, j = position[0], position[1]%>
 <%# positions are now positions in domain :: location :: field %>
-<% if player == @gameState.player_one.name %>
+<% if player.name == @gameState.player_one.name %>
     <% first_row = j == 0%>
     <% previous_row = j-1%>
     <% last_row = j ==2 %>
@@ -18,7 +18,7 @@
 
 <% elsif !@a_card_is_moved%>
     <% if @gameState.field.cards[i][j].kind_of?(MonsterCard) %>
-        <%if card.player_name == player%>
+        <%if card.player.name == player.name%>
             <% if !last_row %>
                 <%= button_to "cards", {:action => "move"}, params: {position: [i,j]} %> 
             <% else %>
