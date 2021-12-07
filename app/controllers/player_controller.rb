@@ -50,7 +50,7 @@ class PlayerController < ApplicationController
         @a_card_is_clicked = session[:playing2]
         @a_card_is_moved = session[:moving2]
         puts "playing2 after p2 before #{session[:playing2]}"
-        ActionCable.server.broadcast("best_room", { body: "This Room is Best Room." })
+        #ActionCable.server.broadcast("best_room", { body: "This Room is Best Room." })
         puts "playing2 after p2 and broadcast #{session[:playing2]}"
     end
 end
