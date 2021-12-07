@@ -28,7 +28,9 @@
             <%i=i+1%>
         <%end%>   
     </turbo-frame>
-    <span class = deck> DECK</span>
+    <span class = deck> DECK
+     <%= button_to "draw", {:action => "draw"} %> 
+     </span>
 </div>
 <div id = "broadcasttest">
 TEST

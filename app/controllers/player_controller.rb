@@ -43,6 +43,11 @@ class PlayerController < ApplicationController
         render "join"
     end
 
+    def draw
+        @@game.gameState.player_two.draw()
+        self.expose
+        render "join"
+    end
 
     def expose
         @@game = GameController.game

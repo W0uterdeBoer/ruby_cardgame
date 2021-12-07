@@ -53,12 +53,27 @@ class GameController < ApplicationController
     puts "Join asks the gamestate"
     @@game 
   end
+  
+  def draw
+    @@game.gameState.player_one.draw()
+    self.expose
+    render "start"
+  end
 
   def update
     self.expose
     render "start"
   end
+
+  def attack
+    card = @@game.gameState.field.cards[params[:position][0].to_i][params[:position][1].to_i]
+    card.move(:F)
+    self.expose
+    render "start"
+  end
+
   private
+
 
   def expose
     @a_card_is_clicked = session[:playing]

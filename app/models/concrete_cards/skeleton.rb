@@ -36,7 +36,9 @@ class FortifyUndead < Spell
     end
 
     def playCondition(card)
-        super() && card.type == "undead"       
+        unless card.nil?
+            super() && card.type == "undead"       
+        end
     end
 
     def getPlayed(card)
