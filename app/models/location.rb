@@ -86,7 +86,14 @@ class Field < Location
         elsif card.player.number == 2
             row = 2
         end
-        @cards[column][row] = card
+
+        if @cards[column][row].kind_of?(MonsterCard)
+            if @cards[column][row].def < card.atk
+                @cards[column][row] = card
+            end
+        else
+            @cards[column][row] = card
+        end
     end
 
     def move(position, direction)

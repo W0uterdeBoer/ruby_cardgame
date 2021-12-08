@@ -1,0 +1,94 @@
+So, welcome to my presentation.
+Presentations are not really within my skillset but let's go.
+
+So, the precise plans: A two player card game. Players take turns drawing
+and playing cards. There should be different kinds of cards. With distinct 
+behaviours. Players should be able to move cards over the field and attack 
+each other with these cards.
+
+Now realize that a full trading card game is huge, there are thousands of cards all
+of which can affect each other in different ways. A finished game was not a realistic end-goal 
+and therefore not my aim.
+
+My aim was to have a setup where I could play with the ruls of the game and the cards in the game
+to see what would lead to better gameplay.
+
+Even in the setup, a lot was yet to be determined. This was on purpose. 
+My end goal was a basic setup where I could play with the rules to see what exactly would 
+lead to a better game.
+
+So: the exact rules where yet to be determined, further more. It was more
+important to me to have something that was easily scalable to a larger project(that was not 
+gonna get finished, but whatever.
+
+So, how did this go in practice. 
+
+Well, the first week everything went well. There was a verticle slice
+and a somewhat decently working backend. So everything seemed fine.
+
+In the second week week I focussed a lot on making both the frontend and
+backend better. These were, necessary for my sprint goals to be archieved,
+but were not, in fact, my sprint goals.
+
+This of course caused a re-evaluation of the plans. 
+I had to admit that not everything I wanted to do could be done in the 
+time given. So I made some choices.
+- Minimal number of cards
+- Be okay with the front end as it was at the time.
+- Focus on how to do things instead of getting as much as possible done.
+
+There was a tension here between two things. Those being learning things
+and getting things done. A lot of times, there was a quick and dirty way
+of doing things and a much cleaner way that I did not entirely understand yet.
+
+
+Architecture.
+Almost the entire stack consists of ruby.
+All of the architecture was dictated by ruby on rails.
+
+Whe thus have a Model, consisting of some files in plain ruby.
+This contains the backend logic of the game.
+
+View:, the client side of thing. This consists mainly of erb-files,
+which are a mix of HTML and ruby. a css file.
+
+and of course a control layer. This is where ruby on rails starts shining.
+We have controllers that automatically connect to specified views in the front-end
+as such we can focus on the logic. No api calls necessary.
+
+There are however some maps in ruby on rails that are outside of the standard MVC-structure
+such as the assets map for css and images. These can be automatically found from the view.
+and the routes file, which couples the client and api, is in a configurations map.
+
+Specifics.
+The previous slide was mainly dictated by ruby on rails, there are however some specific choices
+that I made.
+
+We do not have a database, the not having of a database was actually the most difficult 
+part, since rails is rather insistent on giving you one.
+
+Furtermore, we used some gems, those are packages. That are not native to rails itself.
+
+gems: mini-test: a test suite that is not dependent on a rails database.
+gems: turbo-frames and turbo-streams. speeding up the rendering.
+gems: pry, debugger in the terminal.
+bundle.
+
+
+Take-aways
+* First thing I learnt is how to approach working with a framework. 
+There is some push and pull going on. 
+On the one hand you need to understand what the framework wants and adjust to that,
+while on the other hand you need to work arround the framework to archieve your goal
+or flat out tell it no in some cases. So that was interresting to experience.
+
+* The complexity of your stack is also something that can grow over time.
+Not everything needs to be fancy and automated at the start it just needs to work and you can
+add things later. so in short: the Minimum viable product also goes for the stack itself
+not just the part that a user sees.
+
+* Lastly, and possibly related to the previous point. There is a distinction between 
+a theoretical understanding of what everything in your app does and actually knowing how to
+work with everything. And not understanding this has resulted in me wanting things that are
+way to complex for where I am at.
+

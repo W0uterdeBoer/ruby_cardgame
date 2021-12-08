@@ -49,6 +49,13 @@ class PlayerController < ApplicationController
         render "join"
     end
 
+    def attack
+        card = @@game.gameState.field.cards[params[:position][0].to_i][params[:position][1].to_i]
+        card.move(:F)
+        self.expose
+        render "join"
+    end
+
     def expose
         @@game = GameController.game
         @gameState= @@game.gameState
