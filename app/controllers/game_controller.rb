@@ -71,6 +71,12 @@ class GameController < ApplicationController
     render "start"
   end
 
+  def end_turn
+    ActionCable.server.broadcast("best_room", { body: "p2_turn" })
+    self.expose
+    render "start"
+end
+
   private
 
 

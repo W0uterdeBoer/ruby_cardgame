@@ -31,8 +31,9 @@
         <%end%>   
     </turbo-frame>
     <span class = deck> DECK
-     <%= button_to "draw", {:action => "draw"} %> 
-     </span>
+        <%= button_to "draw", {:action => "draw"} %> 
+    </span>
+    <%= button_to "end_turn", {:action => "end_turn"}%>
 </div>
 <div id = "broadcasttest">
 TEST

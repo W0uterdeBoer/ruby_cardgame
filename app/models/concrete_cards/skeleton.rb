@@ -30,7 +30,8 @@ class FortifyUndead < Spell
             player.field.cards[i][j] = buffed_target
 
         else
-            raise "PlayCondition failed"
+            puts "PlayCondition failed"
+            buffed_target = target
         end
         return buffed_target
     end

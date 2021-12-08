@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   post "/attack", to: "game#attack"
   post "/join/attack", to: "player#attack"
 
+  post "/join/end_turn", to: "player#end_turn"
+  post "/end_turn", to: "game#end_turn"
 end
