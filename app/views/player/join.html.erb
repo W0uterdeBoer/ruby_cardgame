@@ -25,7 +25,7 @@
         <% i = 0 %>
         <% while i < @gameState.player_two_hand.cards.size do %>          
             <%hand_content = @gameState.player_two_hand.cards[i]%>
-            <%= render partial: 'card', locals: {card: hand_content, player: this_player,  position: i, source: "hand"} %>
+            <%= render partial: 'card', locals: {card: hand_content, player: this_player,  position: i, source: "hand", turn_player: @turn_player} %>
 
             <%i=i+1%>
         <%end%>   

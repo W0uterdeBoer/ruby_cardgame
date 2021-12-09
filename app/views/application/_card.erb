@@ -11,13 +11,14 @@
         <%= image_tag(image_link, :alt => alt) %>
     <%end %>
 
-    <%case source %>
-        <%when "hand" %>
-            <%= render partial: 'hand_button', locals: {card: card, position: position} %>
-        <% when "field"%>
-             <%= render partial: 'field_button', locals: {card: card, position: position, player: player} %>
+    <%if player == @turn_player%>
+        <%case source %>
+            <%when "hand" %>
+                <%= render partial: 'hand_button', locals: {card: card, position: position} %>
+            <% when "field"%>
+                <%= render partial: 'field_button', locals: {card: card, position: position, player: player} %>
         <% end%>
-
+    <%end %>
     <% if card.kind_of? MonsterCard%>
         <span  style = "display:bottom"> 
            <%= "atk: #{card.atk}, def: #{card.def}"%>

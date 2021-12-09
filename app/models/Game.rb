@@ -10,7 +10,7 @@ class Game
         @player_one.opponent = @player_two
         @player_two.opponent = @player_one
         cards = [MonsterCard, Spell]
-        concrete_cards =[Skeleton,FortifyUndead]
+        concrete_cards =[Skeleton,FortifyUndead,Guard]
         setup(@player_one, concrete_cards)
         setup(@player_two, concrete_cards)
 
@@ -27,7 +27,7 @@ class Game
 end
 
 class GameState
-    attr_reader :player_one, :player_two, :deck , :hand , :field, :player_two_deck, :player_two_hand
+    attr_reader :player_one, :player_two, :deck , :hand , :field, :player_two_deck, :player_two_hand, :turn_player
     def initialize(player_one, player_two)
         @player_one = player_one
         @player_two = player_two
@@ -36,6 +36,16 @@ class GameState
         @field = @player_one.field
         @player_two_deck = player_two.deck
         @player_two_hand = player_two.hand
+        @turn_player = player_one
+    end
 
+
+
+    def switch_turn
+        if @turn_player == player_one
+            @turn_player = player_two
+        elsif @turn_player == player_two
+            @turn_player = player_one
+        end
     end
 end

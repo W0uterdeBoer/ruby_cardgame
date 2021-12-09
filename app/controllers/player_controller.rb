@@ -9,12 +9,9 @@ class PlayerController < ApplicationController
         puts "start of play : #{session[:playing2]}"
         if  session[:playing2]
             column = params[:column_id]
-            card = @@game.gameState.player_two_hand.cards[session[:card_id].to_i]
-            if card.class.to_s == "Skeleton"        
-                card.play(column.to_i)
-            elsif card.class.to_s == "FortifyUndead" 
-              card.play(column.to_i, 2)
-            end
+            card = @@game.gameState.player_two_hand.cards[session[:card_id].to_i]    
+            card.play(column.to_i)
+            
             session[:playing2] = false
           else
             session[:card_id] = params[:card_id]
@@ -60,6 +57,7 @@ class PlayerController < ApplicationController
 
     def end_turn
         ActionCable.server.broadcast("best_room", { body: "p1_turn" })
+        @@game.gameState.switch_turn
         self.expose
         render "join"
     end
@@ -69,8 +67,6 @@ class PlayerController < ApplicationController
         @gameState= @@game.gameState
         @a_card_is_clicked = session[:playing2]
         @a_card_is_moved = session[:moving2]
-        puts "playing2 after p2 before #{session[:playing2]}"
- 
-        puts "playing2 after p2 and broadcast #{session[:playing2]}"
+        @turn_player = @@game.gameState.turn_player
     end
 end

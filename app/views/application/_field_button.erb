@@ -29,7 +29,6 @@
     <% end%>
 
 <%elsif @a_card_is_moved%>
-    <% puts @position[0]%>
     
     <%if @position[1].to_i == previous_row && (@position[0].to_i - i).abs() < 2%>
         <% puts "#{i},#{j}" %>

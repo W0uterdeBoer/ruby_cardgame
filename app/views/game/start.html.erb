@@ -26,7 +26,7 @@
         <% i = 0 %>
         <% while i < @gameState.hand.cards.size do %>          
             <%hand_content = @gameState.hand.cards[i]%>
-            <%= render partial: 'card', locals: {card: hand_content, player: this_player,  position: i, source: "hand"} %>
+            <%= render partial: 'card', locals: {card: hand_content, player: this_player,  position: i, source: "hand", turn_player: @turn_player} %>
             <%i=i+1%>
         <%end%>   
     </turbo-frame>
@@ -36,5 +36,4 @@
     <%= button_to "end_turn", {:action => "end_turn"}%>
 </div>
 <div id = "broadcasttest">
-TEST
 </div>

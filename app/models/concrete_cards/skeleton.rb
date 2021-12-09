@@ -10,9 +10,9 @@ class Skeleton < MonsterCard
         @url = "skeleton.jpg"
     end
 
-    def atk
-        @atk
-    end
+    #def atk
+    #    @atk
+    #end
 end
 
 class FortifyUndead < Spell
@@ -22,7 +22,13 @@ class FortifyUndead < Spell
       @url = "fortifyundead.png"
     end
 
-    def play(i,j)
+    def play(i)
+        if player.number == 1
+            j = 0
+        elsif player.number == 2
+            j = 2
+        end
+
         target = player.field.cards[i][j]
         
         if self.playCondition(target)
