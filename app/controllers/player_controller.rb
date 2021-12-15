@@ -1,4 +1,5 @@
 class PlayerController < ApplicationController
+    
     def join()
         session[:playing2] = false
         session[:moving2] = false

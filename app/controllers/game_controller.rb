@@ -2,9 +2,19 @@ require 'pry'
 class GameController < ApplicationController
   attr_reader :aCardIsClicked
   attr_reader :game
+  attr_reader :this_player
+
+  include Draw
+  
+
+  before_action :make_player
+  def make_player
+    @@game = Game.new() if defined?(@@game).nil?
+    @this_player = @@game.gameState.player_one unless defined?(@@game).nil?
+    puts "GET FILTERED"
+  end
 
   def start
-    @@game = Game.new()
     session[:playing] = false
     session[:moving] = false
     self.expose
@@ -45,14 +55,14 @@ class GameController < ApplicationController
   end 
 
   def self.game
-    puts "Join asks the gamestate"
+    puts "Someone asks the gamestate"
     @@game 
   end
   
-  def draw
-    @@game.gameState.player_one.draw()
-    self.update
-  end
+  # def draw
+  #   @@game.gameState.player_one.draw()
+  #   self.update
+  # end
 
   def update
     self.expose
