@@ -2,8 +2,12 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
+gem 'rails-controller-testing'
+gem 'rspec'
+gem 'minitest-spec-rails'
+gem 'httparty'
 gem 'pry'
-gem 'redis'
+#gem 'redis'
 gem 'require_all'
 gem 'solargraph'
 gem 'rb-readline', '>=0.5.5'

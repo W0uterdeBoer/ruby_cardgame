@@ -1,4 +1,4 @@
-
+require_relative '../Card.rb'
 
 class Guard < MonsterCard
     attr_reader :atk, :def, :url, :type

@@ -3,7 +3,7 @@ require "./test/test_helper"
 require 'minitest/autorun'
 require_rel '../../app/models/concrete_cards'
 
-class CardTest < MiniTest::Test
+class ConcreteCardTest < MiniTest::Test
     def setup()
         game = Game.new()
         @player =game.player_one
@@ -27,7 +27,7 @@ class CardTest < MiniTest::Test
     end
     def test_fortify
         @skelly.play(0)
-        @skelly = @fortify.play(0,0)
+        @skelly = @fortify.play(0)
 
         assert_equal(2, @skelly.atk)
         assert_equal(2, @skelly.def)
@@ -36,7 +36,7 @@ class CardTest < MiniTest::Test
 
     def test_fortified_is_on_field
         @skelly.play(0)
-        @skelly = @fortify.play(0,0)
+        @skelly = @fortify.play(0)
         @skelly.move("F")
         puts(@skelly.class)
         assert_equal(@skelly, @field.cards[0][1])
@@ -45,7 +45,7 @@ class CardTest < MiniTest::Test
     def test_test
         puts "starting === test"
         @skelly.play(0)
-        skelly_imposter = @fortify.play(0,0)
+        skelly_imposter = @fortify.play(0)
         assert_equal(true, skelly_imposter === @skelly)
         assert_equal(true, @skelly === skelly_imposter)
     end

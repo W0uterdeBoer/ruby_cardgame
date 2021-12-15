@@ -4,9 +4,9 @@ require 'minitest/autorun'
 require_relative '../../app/models/Card.rb'
 require_relative '../../app/models/Player.rb'
 require_rel '../../app/models/concrete_cards'
-class CardTest < MiniTest::Test
+class GameTest < MiniTest::Test
 	DECKSIZE = 40
-	def setup	
+	def setup()
 		game = Game.new()
 		@player =game.player_one
 		@field = @player.field
