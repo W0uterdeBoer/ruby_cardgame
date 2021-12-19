@@ -1,10 +1,9 @@
 require 'pry'
 class GameController < ApplicationController
-  attr_reader :aCardIsClicked
   attr_reader :game
   attr_reader :this_player
 
-  include Draw
+  include PlayerActions
   
 
   before_action :make_player

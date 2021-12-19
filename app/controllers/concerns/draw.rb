@@ -1,5 +1,5 @@
 require "active_support/concern"
-module Draw
+module PlayerActions
     def self.included(base)
         p "IamRunning"
     end 

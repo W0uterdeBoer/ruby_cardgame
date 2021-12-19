@@ -1,5 +1,14 @@
 class PlayerController < ApplicationController
-    
+    attr_reader :this_player
+    include PlayerActions
+
+    before_action :make_player
+    def make_player
+        @@game = Game.new() if defined?(@@game).nil?
+        @this_player = @@game.gameState.player_two unless defined?(@@game).nil?
+        puts "GET FILTERED"
+    end
+
     def join()
         session[:playing2] = false
         session[:moving2] = false
@@ -43,11 +52,11 @@ class PlayerController < ApplicationController
         render "join"
     end
 
-    def draw
-        @@game.gameState.player_two.draw()
-        self.expose
-        render "join"
-    end
+    # def draw
+    #     @@game.gameState.player_two.draw()
+    #     self.expose
+    #     render "join"
+    # end
 
     def attack
         card = @@game.gameState.field.cards[params[:position][0].to_i][params[:position][1].to_i]
@@ -59,9 +68,13 @@ class PlayerController < ApplicationController
     def end_turn
         ActionCable.server.broadcast("best_room", { body: "p1_turn" })
         @@game.gameState.switch_turn
+        self.update
+    end
+
+    def update
         self.expose
         render "join"
-    end
+      end
 
     def expose
         @@game = GameController.game
