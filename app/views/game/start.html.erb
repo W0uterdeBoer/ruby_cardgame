@@ -8,7 +8,6 @@
     <% j = 0 %>
     <%while j < @gameState.field.cards.length do%>
         <div><turbo-frame class = "row">
-
             <% i = 0%>
             <% while i < @gameState.field.cards[j].length do%>
                 <%zone_content = @gameState.field.cards[i][2-j]%>
@@ -25,8 +24,8 @@
     <turbo-frame id = "hand"> 
         <% i = 0 %>
         <% while i < @gameState.hand.cards.size do %>          
-            <%hand_content = @gameState.hand.cards[i]%>
-            <%= render partial: 'card', locals: {card: hand_content, player: this_player,  position: i, source: "hand", turn_player: @turn_player} %>
+            <%card = @gameState.hand.cards[i]%>
+            <%= render partial: 'card', locals: {card: card, player: this_player,  position: i, source: "hand", turn_player: @turn_player} %>
             <%i=i+1%>
         <%end%>   
     </turbo-frame>

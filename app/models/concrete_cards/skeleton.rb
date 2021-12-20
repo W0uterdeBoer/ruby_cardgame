@@ -9,13 +9,9 @@ class Skeleton < MonsterCard
         @type = "undead"
         @url = "skeleton.jpg"
     end
-
-    #def atk
-    #    @atk
-    #end
 end
 
-class FortifyUndead < Spell
+class FortifyUndead < SpellCard
     attr_reader :url
     def initialize(player)
       super(player)
@@ -31,10 +27,9 @@ class FortifyUndead < Spell
 
         target = player.field.cards[i][j]
         
-        if self.playCondition(target)
+        if self.playCondition()
             buffed_target = getPlayed(target)
             player.field.cards[i][j] = buffed_target
-
         else
             puts "PlayCondition failed"
             buffed_target = target
@@ -42,10 +37,20 @@ class FortifyUndead < Spell
         return buffed_target
     end
 
-    def playCondition(card)
-        unless card.nil?
-            super() && card.type == "undead"       
+    def playCondition()
+        if player.number == 1
+            j = 0
+        elsif player.number == 2
+            j = 2
         end
+        viable_target = false
+        for card in self.player.field.cards.transpose[j].compact
+            if card.type == "undead"
+                viable_target = true
+            end
+        end
+        return super() && viable_target
+      
     end
 
     def getPlayed(card)

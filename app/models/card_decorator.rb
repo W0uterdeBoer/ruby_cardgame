@@ -36,7 +36,6 @@ class AlterStatsDecorator < CardDecorator
     # Decorators may call parent implementation of the operation, instead of
     # calling the wrapped object directly. This approach simplifies extension of
     # decorator classes.
-    DIRECTIONS = [:LF, :F, :RF].freeze #temporary
     def initialize(card, atkgain, defgain)
 
       super(card)

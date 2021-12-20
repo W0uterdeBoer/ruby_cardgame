@@ -26,7 +26,11 @@ class GameControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "moving" do 
-        post "/play?card_id=2"
+        i=0
+        while  !assigns(:gameState).player_one.hand.cards[i].kind_of?(MonsterCard) do
+            i += 1
+        end
+        post "/play?card_id=#{i}"
         post "/play?column_id=0"
         post "/move?position=[0,0]"
         assert_response :success

@@ -1,3 +1,5 @@
 <% unless @a_card_is_clicked %>
-    <%= button_to "cards", {:action => "play"}, params: {card_id: position} %> 
+    <%if card.playCondition == true %>
+        <%= button_to "cards", {:action => "play"}, params: {card_id: position} %> 
+    <% end %>
 <%end%>   

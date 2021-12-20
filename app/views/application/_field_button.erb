@@ -1,5 +1,6 @@
 <% i, j = position[0], position[1]%>
 <%# positions are now positions in domain :: location :: field %>
+
 <% if player.name == @gameState.player_one.name %>
     <% first_row = j == 0%>
     <% previous_row = j-1%>
@@ -9,7 +10,6 @@
     <% previous_row = j+1%>
     <% last_row = j == 0%>
 <% end %>
-
 
 <% if @a_card_is_clicked%>  
     <% if first_row%>

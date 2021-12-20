@@ -1,0 +1,11 @@
+
+[1mFrom:[0m C:/Users/woute/Exercise Files/cardgame/app/views/application/_hand_button.erb:2 #<Class:0x000002d906734d08>#_app_views_application__hand_button_erb___534148585_61520:
+
+    [1;34m1[0m: <% unless @a_card_is_clicked %>
+ => [1;34m2[0m:     <%binding.pry%>
+    [1;34m3[0m:     <%if card.playCondition == true %>
+    [1;34m4[0m:         <%binding.pry%>
+    [1;34m5[0m:         <%= button_to "cards", {:action => "play"}, params: {card_id: position} %> 
+    [1;34m6[0m:     <% end %>
+    [1;34m7[0m: <%end%>   
+

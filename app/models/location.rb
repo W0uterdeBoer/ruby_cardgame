@@ -50,6 +50,15 @@ class Hand < Location
             removedCard
         end
     end
+
+    def check_for_battlecards()
+        battle_cards_exist = false
+        for card in cards
+            battle_cards_exist = true if card.responds_to(:battlecard)
+        end
+        p "BATTLECARDSDETECTED"
+        return battle_cards_exist
+    end
 end
 
 class Field < Location
@@ -104,10 +113,12 @@ class Field < Location
             card = @cards[position[0]][position[1]]
             card.player.opponent.hp -= 1
             @cards[position[0]][position[1]] = nil
+
         elsif   @cards[new_position[0]][new_position[1]] == nil
             @cards[new_position[0]][new_position[1]] = @cards[position[0]][position[1]]
             @cards[position[0]][position[1]] = nil
             puts "Card moved in field"
+
         else
             fight( position,new_position)
         end
@@ -124,13 +135,15 @@ class Field < Location
         else
             "raise: one of the fighting cards is not a monster"
         end
-
+        card.player.hand.check_for_battlecards(card, opponent_card);
         if atk_difference > 0
             @cards[new_position[0]][new_position[1]] = card
             @cards[position[0]][position[1]] = nil
+
         elsif atk_difference == 0
             @cards[new_position[0]][new_position[1]] = nil
             @cards[position[0]][position[1]] = nil
+
         else 
             @cards[position[0]][position[1]] = nil
         end
@@ -144,6 +157,7 @@ class Field < Location
         else 
             forward_direction = -1 
         end
+
         case direction
         when :F
             new_position[1] += forward_direction
@@ -159,7 +173,4 @@ class Field < Location
         new_position
     end
 
-    def attack_player
-
-    end
 end

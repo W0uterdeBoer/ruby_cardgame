@@ -4,7 +4,6 @@ require_relative "card_decorator.rb"
 class Card < Component
 
     attr_reader :player
-    #attr_reader :player_name
     def initialize(player)
         @known_locations = Hash.new
         @player = player
@@ -12,12 +11,11 @@ class Card < Component
         @known_locations["hand"] = @player.hand
         @known_locations["field"] = @player.field
         @startingDeck = @player.deck
-        @player_name = player.name
     end     
 
 
     def play(column) 
-        if self.playCondition() 
+        if self.playCondition
             getPlayed(column)
         else 
             raise "playcondition was #{self.playCondition}"
@@ -32,11 +30,14 @@ class Card < Component
         end
     end
 
-private
     def playCondition()
-       puts "playcondition unlocked"
-       @known_locations["hand"].contains(self)
+        puts "playcondition unlocked"
+        @known_locations["hand"].contains(self)
     end
+    
+
+private
+    
 
     def getPlayed(column)
         puts "a card got played"
@@ -72,7 +73,7 @@ class MonsterCard < Card
     end 
 end
 
-class Spell < Card
+class SpellCard < Card
 end
 
 
