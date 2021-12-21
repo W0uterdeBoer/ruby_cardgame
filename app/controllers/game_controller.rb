@@ -30,9 +30,6 @@ class GameController < ApplicationController
     render "start"
   end
 
- 
-
-  
 
   private
 
@@ -40,6 +37,7 @@ class GameController < ApplicationController
   def expose
     @a_card_is_clicked = session[:playing]
     @a_card_is_moved = session[:moving]
+    @in_fighting_phase = session[:fighting]
     @gameState = @@game.gameState
     @turn_player = @@game.gameState.turn_player
     puts "moving after p1 #{session[:moving]}"

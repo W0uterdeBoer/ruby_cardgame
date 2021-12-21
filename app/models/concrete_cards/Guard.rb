@@ -1,5 +1,5 @@
 require_relative '../Card.rb'
-
+require_relative '../location.rb'
 class Guard < MonsterCard
     attr_reader :atk, :def, :url, :type
     def initialize(player)
@@ -19,22 +19,17 @@ class HolySmite < SpellCard
     end
 
     def play(i)
-        binding.pry
-    end 
-    def no
+       
         if self.playCondition()
-            buffed_target = getPlayed(target)
-            player.field.cards[i][j] = buffed_target
-
+            getPlayed()
+            return true
         else
             puts "PlayCondition failed"
-            buffed_target = target
         end
-        return buffed_target
+        return false
     end
 
     def playCondition()
-
         for card in self.player.field.cards.flatten.compact
             if card.kind_of?(MonsterCard)
                 target_correct = (card.type == "army" && card.player == self.player)               
@@ -44,14 +39,21 @@ class HolySmite < SpellCard
                 opponent_has_undead_card = true if possible_atk_target  
             end        
         end
-
-        result = !!player_has_army_card && !!opponent_has_undead_card
+        fighting_phase = player.phase_tracker.fighting
+        p [!!player_has_army_card ,!!opponent_has_undead_card, fighting_phase]
+        result = !!player_has_army_card && !!opponent_has_undead_card && fighting_phase
         return result
     end
 
-    def getPlayed(card)
-        puts "#{card.class} in getPlayed 1"
+    def getPlayed()
         self.player.hand.remove(self)
-        return card
+        cards = player.phase_tracker.fighting_cards
+        player.phase_tracker.fighting = false
+
+        position_1 = player.field.contains(cards[0], true)
+        position_2 = player.field.contains(cards[1], true)
+        self.player.field.fight(position_1, position_2)
+
+        puts "#{self.class} in getPlayed 1"       
     end
 end

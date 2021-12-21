@@ -19,7 +19,8 @@ class Card < Component
             getPlayed(column)
         else 
             raise "playcondition was #{self.playCondition}"
-        end        
+        end    
+        false    
     end
 
     def ===(card)

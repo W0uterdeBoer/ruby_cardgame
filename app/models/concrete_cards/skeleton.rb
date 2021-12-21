@@ -34,7 +34,7 @@ class FortifyUndead < SpellCard
             puts "PlayCondition failed"
             buffed_target = target
         end
-        return buffed_target
+        return false
     end
 
     def playCondition()

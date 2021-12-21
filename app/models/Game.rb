@@ -2,10 +2,10 @@ require 'require_all'
 require_relative 'location.rb'
 require_rel 'concrete_cards'
 class Game
-    attr_reader :gameState , :player_one
+    attr_reader :gameState , :player_one, :player_two
     def initialize()   
         @player_one = Player.new("Wendy")
-        @player_two = Player.new("Mandy", player_one.field)
+        @player_two = Player.new("Mandy", player_one.field, player_one.phase_tracker)
 
         @player_one.opponent = @player_two
         @player_two.opponent = @player_one
@@ -28,6 +28,7 @@ end
 
 class GameState
     attr_reader :player_one, :player_two, :deck , :hand , :field, :player_two_deck, :player_two_hand, :turn_player
+    attr_accessor
     def initialize(player_one, player_two)
         @player_one = player_one
         @player_two = player_two
@@ -48,4 +49,5 @@ class GameState
             @turn_player = player_one
         end
     end
+    
 end

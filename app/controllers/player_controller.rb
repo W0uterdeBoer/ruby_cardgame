@@ -22,9 +22,10 @@ class PlayerController < ApplicationController
 
     def expose
         @@game = GameController.game
-        @gameState= @@game.gameState
+        @gameState= @@game.gameState        
         @a_card_is_clicked = session[:playing]
         @a_card_is_moved = session[:moving]
+        @in_fighting_phase = session[:fighting]
         @turn_player = @@game.gameState.turn_player
     end
 end

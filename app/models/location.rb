@@ -52,11 +52,12 @@ class Hand < Location
     end
 
     def check_for_battlecards()
+        
         battle_cards_exist = false
         for card in cards
-            battle_cards_exist = true if card.responds_to(:battlecard)
+            battle_cards_exist = true if card.respond_to?(:battlecard)
         end
-        p "BATTLECARDSDETECTED"
+        p "BATTLECARDSDETECTED" if battle_cards_exist
         return battle_cards_exist
     end
 end
@@ -106,7 +107,6 @@ class Field < Location
     end
 
     def move(position, direction)
-        
         new_position = find_new_position(position, direction)
         puts "position #{position}, new_position: #{new_position}"
         if new_position[1] == -1 || new_position[1] == 3
@@ -117,26 +117,27 @@ class Field < Location
         elsif   @cards[new_position[0]][new_position[1]] == nil
             @cards[new_position[0]][new_position[1]] = @cards[position[0]][position[1]]
             @cards[position[0]][position[1]] = nil
-            puts "Card moved in field"
-
+            puts "Card moved in field"    
         else
-            fight( position,new_position)
+            fight(position, new_position)       
         end
     end
 
-    private
-
     def fight(position, new_position)
+
         card =  @cards[position[0]][position[1]]
         opponent_card = @cards[new_position[0]][new_position[1]]
         
         if card.kind_of?(MonsterCard) && opponent_card.kind_of?(MonsterCard)
             atk_difference = card.atk - opponent_card.atk
         else
-            "raise: one of the fighting cards is not a monster"
+            raise "one of the fighting cards is not a monster"
         end
-        card.player.hand.check_for_battlecards(card, opponent_card);
-        if atk_difference > 0
+
+        if card.player.hand.check_for_battlecards()
+            card.player.phase_tracker.fighting = true
+            card.player.phase_tracker.set_fighting_cards(card, opponent_card)
+        elsif atk_difference > 0
             @cards[new_position[0]][new_position[1]] = card
             @cards[position[0]][position[1]] = nil
 
@@ -147,8 +148,9 @@ class Field < Location
         else 
             @cards[position[0]][position[1]] = nil
         end
-
     end
+
+    private
 
     def find_new_position(position, direction)
         new_position = position.clone

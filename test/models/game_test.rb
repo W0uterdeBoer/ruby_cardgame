@@ -66,5 +66,13 @@ class GameTest < MiniTest::Test
     assert_equal(true, @field.contains(playedCard))
   end
 
+  #this test is shit, does not scale
+  def test_playcondition_takes_void_return_boolean
+	card_list = [Skeleton,FortifyUndead,Guard,HolySmite]
+	play_conditions = card_list.map{|card| card.new(@player).playCondition()}
+	is_boolean = play_conditions.map{|condition| [true,false].include?(condition)}
+	
+	assert_equal(true, is_boolean.reduce{|a,b| a && b })
+  end
 
 end

@@ -1,18 +1,22 @@
 require 'location.rb'
 class Player
-    attr_reader  :name ,:deck ,:hand ,:field, :number
+    attr_reader  :name ,:deck ,:hand ,:field, :number, :phase_tracker
     attr_accessor :opponent, :hp
     def initialize(*args)
       @name = args[0]
       @hand = Hand.new()
       @deck = Deck.new()     
-      @number = args.size;
+      temp_number = args.size;
       @hp = 3
-      case @number
+      case temp_number
         when 1
           @field = Field.new()
-        when 2
+          @phase_tracker = PhaseTracker.new()
+          @number = 1
+        when 3
           @field= args[1]
+          @phase_tracker = args[2]
+          @number = 2
       end
     end
 
