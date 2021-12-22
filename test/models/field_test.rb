@@ -10,7 +10,8 @@ class FieldTest < MiniTest::Test
   def setup()
     @player_one = Player.new("Wendy")
     @field = @player_one.field
-    @player_two = Player.new("Mandy", @field)
+    @phase_tracker = @player_one.phase_tracker
+    @player_two = Player.new("Mandy", @field, @phase_tracker)
     @hand = @player_one.hand
     @deck = @player_one.deck
   end
@@ -34,8 +35,9 @@ class FieldTest < MiniTest::Test
 
     played_card = Skeleton.new(@player_two)
     
-	@player_two.hand.add(played_card)
-	@player_two.hand.cards[-1].play(2)   
+	  @player_two.hand.add(played_card)
+    p @player_two.hand.cards[-1]
+	  @player_two.hand.cards[-1].play(2)   
     @field.cards[2][2].move("LF")
 
     assert_nil(@field.cards[1][1])

@@ -43,7 +43,6 @@ private
     def getPlayed(column)
         puts "a card got played"
         @known_locations["hand"].remove(self)
-        puts @known_locations["field"]
         @known_locations["field"].put(column, self)
     end
    

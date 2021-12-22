@@ -52,7 +52,10 @@ class HolySmite < SpellCard
 
         position_1 = player.field.contains(cards[0], true)
         position_2 = player.field.contains(cards[1], true)
-        self.player.field.fight(position_1, position_2)
+
+        @known_locations["field"].cards[position_2[0]][position_2[1]] = cards[0]
+        @known_locations["field"].cards[position_1[0]][position_1[1]] = nil
+
 
         puts "#{self.class} in getPlayed 1"       
     end

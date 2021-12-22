@@ -52,17 +52,19 @@ class ConcreteCardTest < MiniTest::Test
     end
 
     def test_holy_smite
+
         play_from_void(Skeleton, 1, @player_two)
         play_from_void(FortifyUndead, 1, @player_two)
         play_from_void(FortifyUndead, 1, @player_two)
         a_guard = play_from_void(Guard, 1, @player)
+
         a_guard.move(:F)
         smite = HolySmite.new(@player)
         @hand.add(smite)
         a_guard.move(:F)
+        
         smite.play(420) 
-        assert_equal(true, @field.contains(a_guard))
-
+        assert_equal(true, @field.cards[1][2].class == Guard)
     end
 
     def play_from_void(card_type, i, player)

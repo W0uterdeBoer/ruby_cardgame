@@ -127,7 +127,7 @@ class Field < Location
 
         card =  @cards[position[0]][position[1]]
         opponent_card = @cards[new_position[0]][new_position[1]]
-        
+
         if card.kind_of?(MonsterCard) && opponent_card.kind_of?(MonsterCard)
             atk_difference = card.atk - opponent_card.atk
         else
