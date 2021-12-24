@@ -39,7 +39,7 @@ class HolySmite < SpellCard
                 opponent_has_undead_card = true if possible_atk_target  
             end        
         end
-        fighting_phase = player.phase_tracker.fighting
+        fighting_phase = (player.phase_tracker.phase == :battle)
         p [!!player_has_army_card ,!!opponent_has_undead_card, fighting_phase]
         result = !!player_has_army_card && !!opponent_has_undead_card && fighting_phase
         return result
@@ -48,15 +48,45 @@ class HolySmite < SpellCard
     def getPlayed()
         self.player.hand.remove(self)
         cards = player.phase_tracker.fighting_cards
-        player.phase_tracker.fighting = false
+        player.phase_tracker.phase = :main
 
         position_1 = player.field.contains(cards[0], true)
         position_2 = player.field.contains(cards[1], true)
-
-        @known_locations["field"].cards[position_2[0]][position_2[1]] = cards[0]
-        @known_locations["field"].cards[position_1[0]][position_1[1]] = nil
+        if cards[1].def < 6
+            @known_locations["field"].cards[position_2[0]][position_2[1]] = cards[0]
+            @known_locations["field"].cards[position_1[0]][position_1[1]] = nil
+        end
 
 
         puts "#{self.class} in getPlayed 1"       
     end
 end
+
+class FlagBearer < MonsterCard
+    attr_reader :type, :url, :atk, :def
+    def initialize(player)
+        super(player)
+        @url = "flagbearer.jpg"
+        @type = "army"
+        @atk = 1
+        @def = 1
+    end
+
+    def getPlayed(column)    
+        super(column)
+        on_field_cards = @known_locations["field"].cards.flatten.compact
+
+        on_field_cards.each  do |card|    
+            continuous_field_effect(card)           
+        end   
+    end
+
+    def continuous_field_effect(card)
+        if  card.type == "army" && card.class != FlagBearer
+            new_card = AlterStatsDecorator.new(card, 1, 1)
+            position = @known_locations["field"].contains(card, true)
+            @known_locations["field"].cards[position[0]][ position[1]] = new_card
+        end
+    end
+end
+

@@ -1,14 +1,17 @@
 class PhaseTracker
     attr_reader :fighting_cards
-    attr_accessor :fighting
+    attr_accessor :phase
     def initialize()
-        @fighting
+        @phase = :main
     end
 
     def set_fighting_cards(card, opponent)
-        if fighting
+        if phase == :battle
             @fighting_cards = [card, opponent]
         end
     end
     
 end
+
+
+    

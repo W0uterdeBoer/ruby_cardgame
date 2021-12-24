@@ -67,10 +67,20 @@ class ConcreteCardTest < MiniTest::Test
         assert_equal(true, @field.cards[1][2].class == Guard)
     end
 
+    def test_flagbearer
+        p "flagtest"
+        play_from_void(Guard, 0, @player)
+        play_from_void(FlagBearer, 1, @player)
+        p @field.cards[0][0].class
+        assert_equal(3, @field.cards[0][0].atk)
+    end
+
     def play_from_void(card_type, i, player)
         card = card_type.new(player)
         player.hand.add(card)
         card.play(i)
         return card
     end
+
+    
 end

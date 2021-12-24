@@ -175,6 +175,9 @@ GEM
     rainbow (3.0.0)
     rake (13.0.6)
     rb-readline (0.5.5)
+    readapt (1.4.3)
+      backport (~> 1.2)
+      thor (~> 1.0)
     regexp_parser (2.1.1)
     require_all (3.0.0)
     reverse_markdown (2.1.1)
@@ -296,6 +299,7 @@ DEPENDENCIES
   rails (~> 6.1.4, >= 6.1.4.1)
   rails-controller-testing
   rb-readline (>= 0.5.5)
+  readapt
   require_all
   rspec
   sass-rails (>= 6)

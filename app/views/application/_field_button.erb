@@ -22,7 +22,7 @@
             <% if !last_row %>
                 <%= button_to "cards", {:action => "move"}, params: {position: [i,j]} %> 
             <% else %>
-                 <%= button_to "cards", {:action => "attack"}, params: {position: [i,j]} %> 
+                 <%= button_to "cards", {:action => "attack_opponent"}, params: {position: [i,j]} %> 
             <%end %>
 
         <% end%> 

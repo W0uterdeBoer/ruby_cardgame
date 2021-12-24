@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   post "/draw", to: "game#draw"
   post "/join/draw", to: "player#draw"
 
-  post "/attack", to: "game#attack"
-  post "/join/attack", to: "player#attack"
+  post "/attack", to: "game#attack_opponent"
+  post "/join/attack", to: "player#attack_opponent"
 
   post "/join/end_turn", to: "player#end_turn"
   post "/end_turn", to: "game#end_turn"

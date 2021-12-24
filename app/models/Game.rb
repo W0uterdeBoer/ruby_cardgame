@@ -10,7 +10,7 @@ class Game
         @player_one.opponent = @player_two
         @player_two.opponent = @player_one
         cards = [MonsterCard, SpellCard]
-        concrete_cards =[Skeleton,FortifyUndead,Guard,HolySmite]
+        concrete_cards =[Skeleton, FortifyUndead, Guard, HolySmite, FlagBearer]
         setup(@player_one, concrete_cards)
         setup(@player_two, concrete_cards)
 

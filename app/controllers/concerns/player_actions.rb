@@ -12,7 +12,7 @@ module PlayerActions
     end
 
     def play
-      fighting = @this_player.phase_tracker.fighting
+      fighting = (@this_player.phase_tracker.phase == :battle)
         if  session[:playing]
           
           card = this_player.hand.cards[session[:card_id].to_i]
@@ -52,12 +52,11 @@ module PlayerActions
       self.update
     end 
 
-    # def attack
-    #   card = this_player.field.cards[params[:position][0].to_i][params[:position][1].to_i]
-    #   binding.pry
-    #   card.move(:F)
-    #   self.update
-    # end
+     def attack_opponent
+       card = this_player.field.cards[params[:position][0].to_i][params[:position][1].to_i]
+       card.move(:F)
+       self.update
+     end
 
     def end_turn   
       ActionCable.server.broadcast("best_room", { body: "p2_turn" })

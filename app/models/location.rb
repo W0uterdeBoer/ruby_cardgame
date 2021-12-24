@@ -91,19 +91,14 @@ class Field < Location
 
 
     def put(column, card)
-        if card.player.number == 1
-            row = 0
-        elsif card.player.number == 2
-            row = 2
-        end
-
-        if @cards[column][row].kind_of?(MonsterCard)
-            if @cards[column][row].def < card.atk
-                @cards[column][row] = card
+       ended_on_field = put_on_field(column, card)
+       if ended_on_field 
+            cards.flatten.each do |field_card| 
+                if field_card.respond_to?(:continuous_field_effect)
+                    field_card.continuous_field_effect(card)  
+                end
             end
-        else
-            @cards[column][row] = card
-        end
+       end
     end
 
     def move(position, direction)
@@ -135,7 +130,7 @@ class Field < Location
         end
 
         if card.player.hand.check_for_battlecards()
-            card.player.phase_tracker.fighting = true
+            card.player.phase_tracker.phase = :battle
             card.player.phase_tracker.set_fighting_cards(card, opponent_card)
         elsif atk_difference > 0
             @cards[new_position[0]][new_position[1]] = card
@@ -175,4 +170,19 @@ class Field < Location
         new_position
     end
 
+    def put_on_field(column, card)
+        if card.player.number == 1
+            row = 0
+        elsif card.player.number == 2
+            row = 2
+        end
+
+        if @cards[column][row].kind_of?(MonsterCard)
+            if @cards[column][row].def < card.atk
+                @cards[column][row] = card
+            end
+        else
+            @cards[column][row] = card
+        end
+    end 
 end
