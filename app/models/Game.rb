@@ -1,5 +1,6 @@
 require 'require_all'
-require_relative 'location.rb'
+require_relative 'locations/deck.rb'
+#require_rel 'locations/*.rb'
 require_rel 'concrete_cards'
 class Game
     attr_reader :gameState , :player_one, :player_two
@@ -10,9 +11,10 @@ class Game
         @player_one.opponent = @player_two
         @player_two.opponent = @player_one
         cards = [MonsterCard, SpellCard]
-        concrete_cards =[Skeleton, FortifyUndead, Guard, HolySmite, FlagBearer]
-        setup(@player_one, concrete_cards)
-        setup(@player_two, concrete_cards)
+        first_deck = [Skeleton, FortifyUndead]
+        second_deck = [Guard, HolySmite, FlagBearer]
+        setup(@player_one, first_deck)
+        setup(@player_two, second_deck)
 
         @gameState = GameState.new(@player_one, @player_two)
     end 

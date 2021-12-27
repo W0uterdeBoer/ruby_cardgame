@@ -1,4 +1,4 @@
-require_relative 'location.rb'
+#require_relative 'locations/location.rb'
 require_relative "card_decorator.rb"
 
 class Card < Component

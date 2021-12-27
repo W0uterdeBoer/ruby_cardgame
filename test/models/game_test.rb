@@ -4,12 +4,14 @@ require 'minitest/autorun'
 require_relative '../../app/models/Card.rb'
 require_relative '../../app/models/Player.rb'
 require_rel '../../app/models/concrete_cards'
-class GameTest < MiniTest::Test
+require_rel 'concrete_card_test.rb'
+class GameTest < ActiveSupport::TestCase
 	DECKSIZE = 40
 	def setup()
 		game = Game.new()
 		@player =game.player_one
 		@field = @player.field
+		@phase_tracker = @player.phase_tracker
 		@deck = @player.deck
 		@acard = @deck.cards[0]
 		@hand = @player.hand	
@@ -75,4 +77,15 @@ class GameTest < MiniTest::Test
 	assert_equal(true, is_boolean.reduce{|a,b| a && b })
   end
 
+  def test_game_winner_found
+	3.times{attack_opponent_from_void(Skeleton, @player)}
+	assert_equal(@player, @phase_tracker.winner)
+  end
+
+  def attack_opponent_from_void(card_class, player)
+	card = play_from_void(card_class, 1 , player)
+	3.times{card.move(:F)}
+  end	
+
+  
 end

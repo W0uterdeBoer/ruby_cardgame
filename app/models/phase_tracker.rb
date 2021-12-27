@@ -1,6 +1,6 @@
 class PhaseTracker
-    attr_reader :fighting_cards
-    attr_accessor :phase
+    attr_reader :fighting_cards, :winner
+    attr_accessor :phase 
     def initialize()
         @phase = :main
     end
@@ -9,6 +9,10 @@ class PhaseTracker
         if phase == :battle
             @fighting_cards = [card, opponent]
         end
+    end
+
+    def declare_winner(player)
+        @winner = player
     end
     
 end

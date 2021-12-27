@@ -27,7 +27,12 @@ class GameController < ApplicationController
   
   def update
     self.expose
-    render "start"
+    if @@game.gameState.player_one.phase_tracker.winner == nil 
+      render "start"
+    else
+      render "winner"
+    end
+    
   end
 
 

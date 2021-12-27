@@ -1,67 +1,5 @@
-
-require_relative '../models/Card.rb'
-require_relative 'Player.rb'
-
-
-class Location
-    attr_reader :cards
-    def contains(card)
-        isInLocation = false
-        cards.each do |cardInLocation| 
-            if card == cardInLocation
-                isInLocation = true
-            end
-        end
-        isInLocation
-    end
-
-    def remove(card)
-        raise "remove not implemented."
-    end
-end
-
-class Deck < Location
-    STARTINGSIZE = 40
-    attr_reader  :cards
-    def initialize()
-        @cards = Array.new()   
-    end
-
-    def fill(cardlist)   
-        @cards=cardlist.shuffle
-    end
-end
-
-class Hand < Location
-    
-    def initialize()
-        @cards = Array.new()
-    end
-
-    def add(card)
-        @cards.push(card)
-    end
-
-    def remove(card)
-        cards.each_with_index do |cardInHand, i| 
-            if cardInHand === card
-                removedCard = @cards.delete_at(i)
-            end
-            removedCard
-        end
-    end
-
-    def check_for_battlecards()
-        
-        battle_cards_exist = false
-        for card in cards
-            battle_cards_exist = true if card.respond_to?(:battlecard)
-        end
-        p "BATTLECARDSDETECTED" if battle_cards_exist
-        return battle_cards_exist
-    end
-end
-
+require_relative "location.rb"
+require_relative "discard.rb"
 class Field < Location
     attr_reader :cards
     def initialize()
@@ -135,13 +73,17 @@ class Field < Location
         elsif atk_difference > 0
             @cards[new_position[0]][new_position[1]] = card
             @cards[position[0]][position[1]] = nil
+            opponent_card.player.discard.add(opponent_card)
 
         elsif atk_difference == 0
             @cards[new_position[0]][new_position[1]] = nil
             @cards[position[0]][position[1]] = nil
+            card.player.discard.add(card)
+            opponent_card.player.discard.add(opponent_card)
 
         else 
             @cards[position[0]][position[1]] = nil
+            card.player.discard.add(card)
         end
     end
 

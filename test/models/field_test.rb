@@ -4,7 +4,7 @@ require 'minitest/autorun'
 require_relative '../../app/models/Card.rb'
 require_relative '../../app/models/Player.rb'
 require_rel '../../app/models/concrete_cards'
-class FieldTest < MiniTest::Test
+class FieldTest < ActiveSupport::TestCase
 	DECKSIZE = 40
 
   def setup()
@@ -17,9 +17,7 @@ class FieldTest < MiniTest::Test
   end
 
   def test_move
-  	played_card = MonsterCard.new(@player_one)
-	  @hand.add(played_card)
-	  @hand.cards[-1].play(0)
+    played_card = play_from_void(MonsterCard, 0, @player_one)
 
 	  @field.cards[0][0].move("RF")
 
@@ -28,16 +26,10 @@ class FieldTest < MiniTest::Test
   end
 
   def test_fight
-    played_card = Skeleton.new(@player_one)
-	  @hand.add(played_card)
-	  @hand.cards[-1].play(0)   
+    played_card = play_from_void(Skeleton, 0, @player_one)  
     @field.cards[0][0].move("RF")
 
-    played_card = Skeleton.new(@player_two)
-    
-	  @player_two.hand.add(played_card)
-    p @player_two.hand.cards[-1]
-	  @player_two.hand.cards[-1].play(2)   
+    played_card = play_from_void(Skeleton, 2, @player_two)  
     @field.cards[2][2].move("LF")
 
     assert_nil(@field.cards[1][1])

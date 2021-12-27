@@ -17,7 +17,11 @@ class PlayerController < ApplicationController
 
     def update
         self.expose
-        render "join"
+        if @@game.gameState.player_one.phase_tracker.winner != nil 
+            render "game/winner"
+        else
+            render "join"
+        end
       end
 
     def expose
