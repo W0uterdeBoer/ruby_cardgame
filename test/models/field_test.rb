@@ -1,9 +1,9 @@
 require 'require_all'
 require_relative "../test_helper.rb"
 require 'minitest/autorun'
-require_relative '../../app/models/Card.rb'
+require_relative '../../app/models/cards/Card.rb'
 require_relative '../../app/models/Player.rb'
-require_rel '../../app/models/concrete_cards'
+require_rel '../../app/models/cards'
 class FieldTest < ActiveSupport::TestCase
 	DECKSIZE = 40
 

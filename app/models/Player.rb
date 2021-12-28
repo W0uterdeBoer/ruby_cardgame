@@ -38,5 +38,14 @@ class Player
       end     
     end
 
+    def get_closest_row
+      if self.number == 1
+          j = 0
+      elsif self.number == 2
+          j = 2
+      end
+      j
+  end
+
 
 end

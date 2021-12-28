@@ -1,6 +1,5 @@
-#require_relative 'locations/location.rb'
-require_relative "card_decorator.rb"
-
+require_relative "../card_decorator.rb"
+require "pry"
 class Card < Component
 
     attr_reader :player
@@ -33,9 +32,21 @@ class Card < Component
 
     def playCondition()
         puts "playcondition unlocked"
-        @known_locations["hand"].contains(self)
+        correct_phase = (player.phase_tracker.phase == :main)
+        correct_location = @known_locations["hand"].contains(self)   
+        #pry-byebug
+        #binding.pry
+        correct_phase && correct_location
     end
     
+    def destroy()
+        @known_locations.each_value do |location|
+            card_position = location.contains(self)
+            target = card_position unless card_position.nil?
+            location.remove(self)
+            player.discard.cards.push(self)
+        end
+    end
 
 private
     

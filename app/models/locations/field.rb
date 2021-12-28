@@ -13,7 +13,6 @@ class Field < Location
         @cards.each_with_index do |row, i| 
             row.each_with_index do |card_in_location, j|
                 if card === card_in_location
-                    puts "Card found"
                     is_in_location = true
                     position = [i,j]
                 end
@@ -74,6 +73,7 @@ class Field < Location
             @cards[new_position[0]][new_position[1]] = card
             @cards[position[0]][position[1]] = nil
             opponent_card.player.discard.add(opponent_card)
+            card.after_fight if card.respond_to?(:after_fight)
 
         elsif atk_difference == 0
             @cards[new_position[0]][new_position[1]] = nil
@@ -84,7 +84,12 @@ class Field < Location
         else 
             @cards[position[0]][position[1]] = nil
             card.player.discard.add(card)
+            opponent_card.after_fight if card.respond_to?(:after_fight)
         end
+    end
+
+    def remove(card)
+        @cards = @cards.map{|column| column.map{|zone| zone = nil if zone = card}}
     end
 
     private
@@ -127,4 +132,6 @@ class Field < Location
             @cards[column][row] = card
         end
     end 
+
+   
 end

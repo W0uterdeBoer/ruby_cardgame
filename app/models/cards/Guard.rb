@@ -1,5 +1,5 @@
 require "require_all"
-require_relative '../Card.rb'
+require_relative 'Card.rb'
 require_rel '../locations'
 class Guard < MonsterCard
     attr_reader :atk, :def, :url, :type
@@ -48,6 +48,7 @@ class HolySmite < SpellCard
 
     def getPlayed()
         self.player.hand.remove(self)
+        self.player.discard.add(self)
         cards = player.phase_tracker.fighting_cards
         player.phase_tracker.phase = :main
 
@@ -84,10 +85,41 @@ class FlagBearer < MonsterCard
 
     def continuous_field_effect(card)
         if  card.type == "army" && card.class != FlagBearer
-            new_card = AlterStatsDecorator.new(card, 1, 0)
+            new_card = AlterStatsDecorator.new(card, 1, 0, self)
             position = @known_locations["field"].contains(card, true)
             @known_locations["field"].cards[position[0]][ position[1]] = new_card
         end
     end
+
+    def alterStatsCondition()
+        @known_locations["field"].contains(self)
+    end
+
+end
+
+class ShieldBearer < MonsterCard
+    attr_reader  :def, :type, :url
+    def initialize(player)
+        super(player)
+        @atk = 4
+        @def = 3
+        @type = "army"
+        @url = "shieldbearer.jpg"
+    end
+
+    def atk
+        location = @known_locations["field"].contains(self,true)
+        if location != false
+            if player.number == 2
+                distance_to_base = 2-location[1]
+            else 
+                distance_to_base = location[1]
+            end
+            @atk - distance_to_base
+        else
+            @atk           
+        end
+    end
+
 end
 

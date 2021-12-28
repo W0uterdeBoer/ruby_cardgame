@@ -1,5 +1,5 @@
 
-require_relative '../Card.rb'
+require_relative '../cards/Card.rb'
 require_relative '../Player.rb'
 
 

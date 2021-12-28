@@ -36,19 +36,37 @@ class AlterStatsDecorator < CardDecorator
     # Decorators may call parent implementation of the operation, instead of
     # calling the wrapped object directly. This approach simplifies extension of
     # decorator classes.
-    def initialize(card, atkgain, defgain)
+    def initialize(card, atkgain, defgain, *causing_card)
 
       super(card)
       @atkgain = atkgain
       @defgain = defgain
+      @causing_card = causing_card[0] unless causing_card.nil?
     end
 
+    #this should throw an error if alterStatsCondition does not exist.
     def atk
-        @component.atk + @atkgain
+      if @causing_card.nil?
+        @component.atk + @atkgain 
+      else
+        if @causing_card.alterStatsCondition
+          @component.atk + @atkgain
+        else 
+          @component.atk
+        end
+      end
     end
 
     def def
-        @component.def + @defgain
+      if @causing_card.nil? 
+        @component.def + @defgain 
+      else
+        if @causing_card.alterStatsCondition
+          @component.def + @atkgain
+        else 
+          @component.def
+        end
+      end       
     end
     
 end

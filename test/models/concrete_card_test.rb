@@ -1,7 +1,7 @@
 require 'require_all'
 require "./test/test_helper"
 require 'minitest/autorun'
-require_rel '../../app/models/concrete_cards'
+require_rel '../../app/models/cards'
 
 class ConcreteCardTest < MiniTest::Test
     def setup()
@@ -26,13 +26,15 @@ class ConcreteCardTest < MiniTest::Test
     def test_undead
         assert_equal("undead", @skelly.type)
     end
+
     def test_fortify
+        "fortify-test"
         @skelly.play(0)
         @fortify.play(0)
         buffed_skelly = @field.cards[0][0]
 
-        assert_equal(2, buffed_skelly.atk)
-        assert_equal(2, buffed_skelly.def)
+        assert_equal(3, buffed_skelly.atk)
+        assert_equal(3, buffed_skelly.def)
     end
 
     def test_fortified_is_on_field
@@ -40,6 +42,15 @@ class ConcreteCardTest < MiniTest::Test
         @fortify.play(0)
         @skelly.move("F")
         assert_equal(false, @skelly==@field.cards[0][1])
+    end
+
+    def test_Ghoul 
+        ghouly = play_from_void(Ghoul, 0, @player)
+        ton = play_from_void(Skeleton, 0, @player_two)
+        ton.move(:F)
+        ghouly.move(:F)
+        assert_equal(3, @field.cards[0][1].atk)
+
     end
 
     def test_equals_is_refexive
@@ -70,9 +81,27 @@ class ConcreteCardTest < MiniTest::Test
     def test_flagbearer
         p "flagtest"
         play_from_void(Guard, 0, @player)
-        play_from_void(FlagBearer, 1, @player)
+        flagguy = play_from_void(FlagBearer, 1, @player)
         p @field.cards[0][0].class
         assert_equal(3, @field.cards[0][0].atk)
+        3.times{flagguy.move(:F)}
+        assert_equal(2, @field.cards[0][0].atk)
+    end
+
+    def test_shieldbearer
+        card = play_from_void(ShieldBearer, 1, @player)
+        card.move(:F)
+        assert_equal(3, card.atk)
+        card.move(:F)
+        assert_equal(2, card.atk)
+    end
+
+    def test_inflict
+        "testing_inflict"
+        guard = play_from_void(Guard, 1, @player_two)
+        guard.move(:F)
+        play_from_void(Inflict_Wound, 1, @player)    
+        assert_nil(@field.cards[1][1])   
     end
 
     def play_from_void(card_type, i, player)
