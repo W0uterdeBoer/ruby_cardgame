@@ -1,21 +1,23 @@
 require_relative 'Card.rb'
 
 class Skeleton < MonsterCard
-    attr_reader :atk, :def, :type, :url
+    attr_reader :atk, :def, :type, :url, :description
     def initialize(player)
         super(player)
         @atk = 1
         @def = 1
         @type = "undead"
         @url = "skeleton.jpg"
+        @description = "a skeleton"
     end
 end
 
 class FortifyUndead < SpellCard
-    attr_reader :url
+    attr_reader :url, :description
     def initialize(player)
       super(player)
       @url = "fortifyundead.png"
+      @description = "Add 2 atk and 2 def to an undead creature on the first row"
     end
 
     def play(i)
@@ -54,13 +56,14 @@ class FortifyUndead < SpellCard
 end
 
 class Ghoul < MonsterCard
-    attr_reader :atk, :def, :type, :url
+    attr_reader :atk, :def, :type, :url, :description
     def initialize(player)
         super(player)
         @atk = 2
         @def = 2
         @type = "undead"
         @url = "ghoul.jpg"
+        @description = " Gains 1 atk after winning a battle"
     end
 
     def after_fight(*args)
@@ -70,11 +73,12 @@ class Ghoul < MonsterCard
     end 
 end
 
-class Inflict_Wound < SpellCard
-    attr_reader :url
+class InflictWound < SpellCard
+    attr_reader :url, :description
     def initialize(player)
         super(player)
         @url = "inflictwound.jpg"
+        @description = "destroys a creature with def <4 on first row or def <3 on second row"
     end
 
     def playCondition()

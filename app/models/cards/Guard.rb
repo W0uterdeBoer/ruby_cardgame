@@ -2,21 +2,24 @@ require "require_all"
 require_relative 'Card.rb'
 require_rel '../locations'
 class Guard < MonsterCard
-    attr_reader :atk, :def, :url, :type
+    attr_reader :atk, :def, :url, :type, :description
     def initialize(player)
         super(player)
         @atk = 2
         @def = 2
         @url = "guard.jpg"
         @type = "army"
+
+        @description = "I am a guard type: army"
     end
 end
 
 class HolySmite < SpellCard
-    attr_reader :url, :battlecard
+    attr_reader :url, :battlecard, :description
     def initialize(player)
       super(player)
       @url = "holysmite.jpg"
+      @description = "An army creature automatically defeats an undead creature, not optional"
     end
 
     def play(i)
@@ -65,13 +68,14 @@ class HolySmite < SpellCard
 end
 
 class FlagBearer < MonsterCard
-    attr_reader :type, :url, :atk, :def
+    attr_reader :type, :url, :atk, :def, :description
     def initialize(player)
         super(player)
         @url = "flagbearer.jpg"
         @type = "army"
         @atk = 0
         @def = 1
+        @description =  "All 'army' monsters on the field except FlagBearer gain 1 atk"
     end
 
     def getPlayed(column)    
@@ -98,13 +102,14 @@ class FlagBearer < MonsterCard
 end
 
 class ShieldBearer < MonsterCard
-    attr_reader  :def, :type, :url
+    attr_reader  :def, :type, :url, :description
     def initialize(player)
         super(player)
         @atk = 4
         @def = 3
         @type = "army"
         @url = "shieldbearer.jpg"
+        @description = "ShieldBearer loses 1 atk for each line it is away from first line"
     end
 
     def atk

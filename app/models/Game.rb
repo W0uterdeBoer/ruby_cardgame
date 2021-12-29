@@ -11,7 +11,7 @@ class Game
         @player_one.opponent = @player_two
         @player_two.opponent = @player_one
         cards = [MonsterCard, SpellCard]
-        first_deck = [Skeleton, FortifyUndead, Ghoul]
+        first_deck = [Skeleton, FortifyUndead, Ghoul, InflictWound]
         second_deck = [Guard, HolySmite, FlagBearer, ShieldBearer]
         setup(@player_one, first_deck)
         setup(@player_two, second_deck)
