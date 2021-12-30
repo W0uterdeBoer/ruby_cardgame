@@ -1,6 +1,7 @@
 class PhaseTracker
     attr_reader :fighting_cards, :winner
     attr_accessor :phase 
+    include Singleton
     def initialize()
         @phase = :main
     end

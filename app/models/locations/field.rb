@@ -1,6 +1,7 @@
 require_relative "location.rb"
 require_relative "discard.rb"
 class Field < Location
+    include Singleton
     attr_reader :cards
     def initialize()
         @cards = Array.new(3){Array.new(3)}
@@ -89,7 +90,12 @@ class Field < Location
     end
 
     def remove(card)
-        @cards = @cards.map{|column| column.map{|zone| zone = nil if zone = card}}
+        binding.pry
+        for i in  0..2 
+            for j in 0..2 
+                @cards[i][j] = nil if card == @cards[i][j]
+            end
+        end
     end
 
     private

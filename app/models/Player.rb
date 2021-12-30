@@ -1,6 +1,6 @@
 #require 'locations/location.rb'
 class Player
-    attr_reader  :name ,:deck ,:hand ,:field, :discard, :number, :phase_tracker, :hp
+    attr_reader  :name ,:deck ,:hand ,:field, :discard, :number, :phase_tracker, :hp, :habitat
     attr_accessor :opponent 
     def initialize(*args)
       @name = args[0]
@@ -9,11 +9,12 @@ class Player
       temp_number = args.size;
       @hp = 3
       @discard = Discard.new()
+      @habitat = Habitat.new()
       
       case temp_number
         when 1
-          @field = Field.new()
-          @phase_tracker = PhaseTracker.new()
+          @field = Field.instance()
+          @phase_tracker = PhaseTracker.instance()
           @number = 1
 
         when 3
@@ -30,6 +31,11 @@ class Player
       @hand.add(drawnCard)
       return nil
     end
+
+    # start_turn should draw when automatic updating is added.
+    def start_turn()
+      @habitat.add(Graveyard.new(self))
+    end 
 
     def hp=(x)
       @hp = x

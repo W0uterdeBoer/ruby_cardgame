@@ -4,21 +4,44 @@
 <h1><%= "#{this_player.name} (#{this_player.hp}) vs #{this_player.opponent.name} (#{this_player.opponent.hp})" %></h1>
 <%= render partial: 'opponent_hand', locals: {opponent: @gameState.player_two} %>
 
+
+
+
 <p class = "field">
     <% j = 0 %>
     <%while j < @gameState.field.cards.length do%>
-        <div><turbo-frame class = "row">
-            <% i = 0%>
+        <div>
+         
+        <turbo-frame class = "row">   
+
+            <% if j == 2 %>
+                <span class = "Habitat">
+                    <%card = this_player.habitat.cards[0]%>
+                    <%= render partial: 'card', locals: {card: card, player: this_player,  position: nil, source: "habitat", turn_player: @turn_player} %>
+                </span>
+            <% end %>       
+
+            <% i = 0%>            
             <% while i < @gameState.field.cards[j].length do%>
                 <%zone_content = @gameState.field.cards[i][2-j]%>
                 <%= render partial: 'card', locals: {card: zone_content, player: this_player , position:[i,2-j], source: "field"} %>
 
                 <% i = i+1%>
-            <%end%>
-            <% j = j + 1%>
-        </turbo-frame></div>
+            <%end%>   
+              
+            <% if j ==  0%>
+                <span class = "Habitat">
+                <%card = this_player.opponent.habitat.cards[0]%>
+                <%= render partial: 'card', locals: {card: card, player: this_player,  position: nil, source: "habitat", turn_player: @turn_player} %>
+                </span>
+            <% end %>           
+        </turbo-frame>  
+        
+        </div>
+        <% j = j + 1%>
     <% end %>
 </p>
+
 <div id = "description"></div>
 <div class = "player">
     <turbo-frame id = "hand"> 

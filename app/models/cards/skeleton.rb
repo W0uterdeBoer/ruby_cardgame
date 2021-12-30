@@ -8,7 +8,7 @@ class Skeleton < MonsterCard
         @def = 1
         @type = "undead"
         @url = "skeleton.jpg"
-        @description = "a skeleton"
+        @description = "type: #{@type} a skeleton"
     end
 end
 
@@ -78,7 +78,7 @@ class InflictWound < SpellCard
     def initialize(player)
         super(player)
         @url = "inflictwound.jpg"
-        @description = "destroys a creature with def <4 on first row or def <3 on second row"
+        @description = "destroys a creature with def < 5 on first row or def < 3 on second row"
     end
 
     def playCondition()

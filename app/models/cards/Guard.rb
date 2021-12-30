@@ -10,7 +10,7 @@ class Guard < MonsterCard
         @url = "guard.jpg"
         @type = "army"
 
-        @description = "I am a guard type: army"
+        @description = "type: #{@type} I am a guard "
     end
 end
 
@@ -75,7 +75,7 @@ class FlagBearer < MonsterCard
         @type = "army"
         @atk = 0
         @def = 1
-        @description =  "All 'army' monsters on the field except FlagBearer gain 1 atk"
+        @description =  "All #{@type} monsters on the field except FlagBearer gain 1 atk"
     end
 
     def getPlayed(column)    
@@ -109,7 +109,7 @@ class ShieldBearer < MonsterCard
         @def = 3
         @type = "army"
         @url = "shieldbearer.jpg"
-        @description = "ShieldBearer loses 1 atk for each line it is away from first line"
+        @description = "type : #{@type} ShieldBearer loses 1 atk for each line it is away from first line"
     end
 
     def atk
@@ -120,7 +120,8 @@ class ShieldBearer < MonsterCard
             else 
                 distance_to_base = location[1]
             end
-            @atk - distance_to_base
+            reduction = distance_to_base + 1
+            @atk - reduction
         else
             @atk           
         end

@@ -50,6 +50,7 @@ class GameState
         elsif @turn_player == player_two
             @turn_player = player_one
         end
+        @turn_player.start_turn()
     end
     
 end

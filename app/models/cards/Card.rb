@@ -87,5 +87,8 @@ end
 class SpellCard < Card
 end
 
+class Structure < Card
+end
+
 
     
