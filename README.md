@@ -1,3 +1,5 @@
+# Dit is mijn eerste applicatie, het is niet representatief voor mijn huidige vaardigheden, hat is ook niet af.
+
 # Core idea
 We want to make a trading card game. 
 Users should be able to go to a site and play a game against each other. 
